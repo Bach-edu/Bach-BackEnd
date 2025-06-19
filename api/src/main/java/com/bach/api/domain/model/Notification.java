@@ -1,5 +1,6 @@
 package com.bach.api.domain.model;
 
+import com.bach.api.domain.model.usuario.Usuario;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "notificaciones")
 public class Notification {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

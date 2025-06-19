@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "desafios")
 public class Desafio {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

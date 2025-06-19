@@ -1,5 +1,6 @@
 package com.bach.api.domain.model;
 
+import com.bach.api.domain.model.usuario.Usuario;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CurrentTimestamp;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Table(name = "mentorias")
 public class Mentoria {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
