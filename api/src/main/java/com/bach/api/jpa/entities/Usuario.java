@@ -1,5 +1,6 @@
 package com.bach.api.jpa.entities;
 
+import com.bach.api.api.types.DtoActualizacionUsuario;
 import com.bach.api.api.types.DtoRegistroUsuario;
 import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.InteresMusical;
@@ -13,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-@Entity(name = "usuario")
+@Entity
 @Table(name = "usuarios")
 public class Usuario implements UserDetails {
     @Id
@@ -42,6 +43,9 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "usuario")
     private Set<SalaChatUsuario> salasChat;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsuarioMentoria> mentorias;
 
     private boolean activo;
 
@@ -104,5 +108,31 @@ public class Usuario implements UserDetails {
 
     public void actualizaRol() {
         this.rol=Role.MENTOR;
+    }
+
+    public void setPassEncode(String passEncrip) {
+        this.passwordHash = passEncrip;
+    }
+
+    public void actualizate(DtoActualizacionUsuario datos) {
+        if (datos.username() != null && !datos.username().isEmpty()) {
+            this.username = datos.username();
+        }if (datos.email() != null && !datos.email().isEmpty()){
+            this.email = datos.email();
+        }if (datos.nombreReal() != null && !datos.nombreReal().isEmpty()){
+            this.nombreReal = datos.nombreReal();
+        }if (datos.intereses() != null && !datos.intereses().isEmpty()){
+            this.intereses = datos.intereses();
+        }if (datos.instrumentoDominados() != null && !datos.instrumentoDominados().isEmpty()){
+            this.instrumentoDominados = datos.instrumentoDominados();
+        }
+    }
+
+    public void setActivoFalse() {
+        this.activo = false;
+    }
+
+    public void setActivoTrue() {
+        this.activo = true;
     }
 }

@@ -5,7 +5,7 @@ import org.hibernate.annotations.CurrentTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "metoria")
+@Entity
 @Table(name = "mentorias")
 public class Mentoria {
     @Id

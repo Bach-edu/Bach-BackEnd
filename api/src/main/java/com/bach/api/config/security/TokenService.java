@@ -37,7 +37,7 @@ public class TokenService {
                     .withIssuer("Bach") // Emisor del token
                     .withSubject(usuario.getEmail())    // Subject: email del usuario
                     .withClaim("id", usuario.getId())   // Claim adicional: id de usuario
-                    .withClaim("role", usuario.getRol().name()) // Claim adicional: rol del usuario
+                    .withClaim("rol", usuario.getRol().name()) // Claim adicional: rol del usuario
                     .withExpiresAt(generarFechaDeExpiracion())
                     .sign(algorithm);
         } catch (JWTCreationException exception){
@@ -90,9 +90,10 @@ public class TokenService {
      */
 
     public Long getClaimId(String token) {
-        if (token == null) {
-            throw new RuntimeException("Token nullo");
+        if (token == null || !token.startsWith("Bearer ")) {
+            throw new RuntimeException("No se encontró Bearer token en la cabecera");
         }
+        token = token.substring(7).trim();
         DecodedJWT verifier = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretConfig.getSecret());
@@ -112,9 +113,10 @@ public class TokenService {
     //Lo mismo pero para rol
 
     public String getClaimrol(String token) {
-        if (token == null) {
-            throw new RuntimeException("Token nullo");
+        if (token == null || !token.startsWith("Bearer ")) {
+            throw new RuntimeException("No se encontró Bearer token en la cabecera");
         }
+        token = token.substring(7).trim();
         DecodedJWT verifier = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(secretConfig.getSecret());
