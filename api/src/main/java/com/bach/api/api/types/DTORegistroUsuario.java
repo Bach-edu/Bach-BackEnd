@@ -7,13 +7,19 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
-public record DtoActualizacionUsuario(
+public record DTORegistroUsuario(
+
+        @NotNull
         String username,
 
-        @Email
+        @NotNull
+                @Email
         String email,
 
+        @NotNull
         String password,
+
+        @NotNull
         String nombreReal,
 
         Set<InteresMusical> intereses,

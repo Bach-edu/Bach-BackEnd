@@ -1,7 +1,7 @@
 package com.bach.api.api.rests;
 
-import com.bach.api.api.types.DatosJWT;
-import com.bach.api.api.types.DtoAuteticacionUsuario;
+import com.bach.api.api.types.DTOJWT;
+import com.bach.api.api.types.DTOAuteticacionUsuario;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.Usuario;
 import com.bach.api.jpa.repositories.UsuarioRepository;
@@ -30,13 +30,13 @@ public class LoginController {
     private TokenService tokenService;
         //autenticacion de usuarios
     @PostMapping
-    public ResponseEntity logIn(@RequestBody @Valid DtoAuteticacionUsuario datosAutenticacion){
+    public ResponseEntity logIn(@RequestBody @Valid DTOAuteticacionUsuario datosAutenticacion){
         //generamos auth token con datos de autenticacion
         Authentication authToken = new UsernamePasswordAuthenticationToken(datosAutenticacion.email(),datosAutenticacion.password());
         //verificamos que exista el usuario
         var usuarioAuth = authenticationManager.authenticate(authToken);
         //generamos el token final
         var token = tokenService.generarToken((Usuario) usuarioAuth.getPrincipal());
-        return ResponseEntity.ok(new DatosJWT(token));
+        return ResponseEntity.ok(new DTOJWT(token));
     }
 }

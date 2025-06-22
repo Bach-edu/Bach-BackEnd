@@ -7,7 +7,7 @@ import com.bach.api.jpa.entities.Usuario;
 
 import java.util.Set;
 
-public record DtoRespuestaUsuario(
+public record DTORespuestaUsuario(
          Long id,
          String username,
          String nombreReal,
@@ -15,7 +15,7 @@ public record DtoRespuestaUsuario(
          Set<InteresMusical> intereses,
          Set<Instrumento> instrumentoDominados
 ) {
-    public DtoRespuestaUsuario(Usuario usuario) {
+    public DTORespuestaUsuario(Usuario usuario) {
         this(usuario.getId(), usuario.getUsername(), usuario.getNombreReal(),
                 usuario.getRol(), usuario.getIntereses(), usuario.getInstrumentoDominados());
     }

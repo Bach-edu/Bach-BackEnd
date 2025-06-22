@@ -1,5 +1,5 @@
 package com.bach.api.api.types;
 
-public record DatosJWT(
+public record DTOJWT(
         String token) {
 }

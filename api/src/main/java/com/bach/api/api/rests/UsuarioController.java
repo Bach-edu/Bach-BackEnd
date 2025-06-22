@@ -1,8 +1,8 @@
 package com.bach.api.api.rests;
 
-import com.bach.api.api.types.DtoActualizacionUsuario;
-import com.bach.api.api.types.DtoRegistroUsuario;
-import com.bach.api.api.types.DtoRespuestaUsuario;
+import com.bach.api.api.types.DTOActualizacionUsuario;
+import com.bach.api.api.types.DTORegistroUsuario;
+import com.bach.api.api.types.DTORespuestaUsuario;
 import com.bach.api.jpa.entities.Usuario;
 import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.UsuarioRepository;
@@ -35,17 +35,17 @@ public class UsuarioController {
     private TokenService tokenService;
 
     @PostMapping("/registrar")
-    public ResponseEntity<DtoRespuestaUsuario> registraUsuario(@Valid @RequestBody DtoRegistroUsuario datos){
+    public ResponseEntity<DTORespuestaUsuario> registraUsuario(@Valid @RequestBody DTORegistroUsuario datos){
         var pass = encoder.encode(datos.password());
         var usuario = new Usuario(datos, pass);
         repository.save(usuario);
-        var datosRespuesta = new DtoRespuestaUsuario(usuario);
+        var datosRespuesta = new DTORespuestaUsuario(usuario);
         return ResponseEntity.ok(datosRespuesta);
     }
 
     @PutMapping("/registrar-mentor")
     @Transactional
-    public ResponseEntity<DtoRespuestaUsuario> registraMentor(@RequestHeader("Authorization") String token){
+    public ResponseEntity<DTORespuestaUsuario> registraMentor(@RequestHeader("Authorization") String token){
         var idUsuario = tokenService.getClaimId(token);
         System.out.println("el id de usuario es: "+idUsuario);
         var usuarioOptional = repository.findById(idUsuario);
@@ -54,14 +54,14 @@ public class UsuarioController {
         }
         var usuario = usuarioOptional.get();
         usuario.actualizaRol();
-        var datosRespuesta = new DtoRespuestaUsuario(usuario);
+        var datosRespuesta = new DTORespuestaUsuario(usuario);
         return ResponseEntity.ok(datosRespuesta);
     }
 
     @PutMapping("/actualizar-perfil")
     @Transactional
-    public ResponseEntity<DtoRespuestaUsuario> actualizaUsuario(@RequestHeader("Authorization") String token,
-                                                                @RequestBody DtoActualizacionUsuario datos){
+    public ResponseEntity<DTORespuestaUsuario> actualizaUsuario(@RequestHeader("Authorization") String token,
+                                                                @RequestBody DTOActualizacionUsuario datos){
         var usuarioId = tokenService.getClaimId(token);
         var usuarioOptional = repository.findById(usuarioId);
         if(usuarioOptional.isEmpty()){
@@ -73,13 +73,13 @@ public class UsuarioController {
             usuario.setPassEncode(passEncrip);
         }
         usuario.actualizate(datos);
-        var datosRespuesta = new DtoRespuestaUsuario(usuario);
+        var datosRespuesta = new DTORespuestaUsuario(usuario);
         return ResponseEntity.ok(datosRespuesta);
     }
 
     @PutMapping("/reactivar-cuenta")
     @Transactional
-    public ResponseEntity<DtoRespuestaUsuario> reactivarUsuario(@RequestHeader("Authorization") String token){
+    public ResponseEntity<DTORespuestaUsuario> reactivarUsuario(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
         var usuarioOptional = repository.findById(usuarioId);
         if (usuarioOptional.isEmpty()){
@@ -87,31 +87,31 @@ public class UsuarioController {
         }
         var usuario = usuarioOptional.get();
         usuario.setActivoTrue();
-        var datos = new DtoRespuestaUsuario(usuario);
+        var datos = new DTORespuestaUsuario(usuario);
         return ResponseEntity.ok(datos);
     }
 
     @GetMapping("/me")
-    public ResponseEntity<DtoRespuestaUsuario> consultaUsuario(@RequestHeader("Authorization") String token){
+    public ResponseEntity<DTORespuestaUsuario> consultaUsuario(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
         var usuarioOptional = repository.findById(usuarioId);
         if (usuarioOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         var usuario = usuarioOptional.get();
-        var datosRespuesta = new DtoRespuestaUsuario(usuario);
+        var datosRespuesta = new DTORespuestaUsuario(usuario);
         return ResponseEntity.ok(datosRespuesta);
     }
 
     @GetMapping("/alumnos")
-    public ResponseEntity<Page<DtoRespuestaUsuario>> obtenAlumnos(@RequestHeader("Authorization") String token,
+    public ResponseEntity<Page<DTORespuestaUsuario>> obtenAlumnos(@RequestHeader("Authorization") String token,
                                                                   Pageable pageable){
         var usuarioId = tokenService.getClaimId(token);
         var rol = tokenService.getClaimrol(token);
         if(!Objects.equals(rol, Role.MENTOR.toString())){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        var alumnos = repository.findByMentorIdAndActivoTrue(usuarioId, pageable).map(DtoRespuestaUsuario::new);
+        var alumnos = repository.findByMentorIdAndActivoTrue(usuarioId, pageable).map(DTORespuestaUsuario::new);
         if (alumnos.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

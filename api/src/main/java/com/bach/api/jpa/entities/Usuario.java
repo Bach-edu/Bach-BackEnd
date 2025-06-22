@@ -1,7 +1,7 @@
 package com.bach.api.jpa.entities;
 
-import com.bach.api.api.types.DtoActualizacionUsuario;
-import com.bach.api.api.types.DtoRegistroUsuario;
+import com.bach.api.api.types.DTOActualizacionUsuario;
+import com.bach.api.api.types.DTORegistroUsuario;
 import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.InteresMusical;
 import com.bach.api.jpa.enums.Role;
@@ -47,11 +47,16 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UsuarioMentoria> mentorias;
 
+    @OneToOne(mappedBy = "usuario",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Perfil perfil = new Perfil(this);
+
     private boolean activo;
 
     public  Usuario(){}
 
-    public Usuario(DtoRegistroUsuario datos, String passwordHash) {
+    public Usuario(DTORegistroUsuario datos, String passwordHash) {
         this.username = datos.username();
         this.nombreReal = datos.nombreReal();
         this.email = datos.email();
@@ -59,6 +64,7 @@ public class Usuario implements UserDetails {
         this.rol = Role.USUARIO;
         this.intereses = datos.intereses();
         this.instrumentoDominados = datos.instrumentoDominados();
+        this.perfil = new Perfil(this);
         this.activo =true;
     }
 
@@ -114,7 +120,7 @@ public class Usuario implements UserDetails {
         this.passwordHash = passEncrip;
     }
 
-    public void actualizate(DtoActualizacionUsuario datos) {
+    public void actualizate(DTOActualizacionUsuario datos) {
         if (datos.username() != null && !datos.username().isEmpty()) {
             this.username = datos.username();
         }if (datos.email() != null && !datos.email().isEmpty()){
