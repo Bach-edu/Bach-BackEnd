@@ -4,7 +4,7 @@ import com.bach.api.api.types.DTOActualizacionPerfil;
 import com.bach.api.api.types.DTORespuestaPerfil;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.repositories.PerfilRepository;
-import com.bach.api.jpa.repositories.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/perfiles")
+@SecurityRequirement(name = "bearer-key")
 public class PerfilController {
 
     @Autowired
@@ -40,6 +41,17 @@ public class PerfilController {
     @GetMapping("/obtener-perfil")
     public ResponseEntity<DTORespuestaPerfil> obtienePerfil(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
+        var perfilOptional = repository.findByUsuarioId(usuarioId);
+        if (perfilOptional.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        var perfil = perfilOptional.get();
+        var datosRespuesta = new DTORespuestaPerfil(perfil);
+        return ResponseEntity.ok(datosRespuesta);
+    }
+
+    @GetMapping("/obtener-perfil/{usuarioId}")
+    public ResponseEntity<DTORespuestaPerfil> obtienePerfilPorId (@PathVariable Long usuarioId, @RequestHeader("Authorization") String token){
         var perfilOptional = repository.findByUsuarioId(usuarioId);
         if (perfilOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

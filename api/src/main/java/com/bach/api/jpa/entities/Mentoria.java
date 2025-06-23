@@ -16,10 +16,6 @@ public class Mentoria {
     @JoinColumn(name = "mentor_id", nullable = false)
     private Usuario mentor;
 
-    @ManyToOne
-    @JoinColumn(name = "desafio_id", nullable = false)
-    private Desafio desafio;
-
     private String tema;
 
     @CurrentTimestamp
