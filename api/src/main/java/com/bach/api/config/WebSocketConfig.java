@@ -1,19 +1,20 @@
 package com.bach.api.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import com.bach.api.domain.websocket.ChatWebSocketHandler;
+import com.bach.api.jpa.websocket.ChatWebSocketHandler;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
+    @Autowired
+    private ChatWebSocketHandler chatWebSocketHandler;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        // Registro del handler para WebSocket
-        registry.addHandler(new ChatWebSocketHandler(), "/chat")
-                .setAllowedOrigins("*");  // Permitir conexiones desde cualquier origen (modificar según necesidad)
+        registry.addHandler(chatWebSocketHandler, "/chat").setAllowedOrigins("*");
     }
 }
