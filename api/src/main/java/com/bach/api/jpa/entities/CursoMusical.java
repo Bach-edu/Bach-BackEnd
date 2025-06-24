@@ -5,6 +5,9 @@ import com.bach.api.api.types.DTORegistroCurso;
 import com.bach.api.jpa.enums.Instrumento;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "curso_musical")
 public class CursoMusical {
@@ -18,12 +21,22 @@ public class CursoMusical {
     @Enumerated(EnumType.STRING)
     private Instrumento instrumentoBase;
 
+    @OneToMany(mappedBy = "curso",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<Mentoria> mentorias;
+
     public CursoMusical(){}
 
     public CursoMusical(DTORegistroCurso datos) {
         this.titulo = datos.titulo();
         this.descripcion = datos.descripcion();
         this.instrumentoBase = datos.instrumentoBase();
+        this.mentorias = new HashSet<>();
+    }
+
+    public Set<Mentoria> getMentorias() {
+        return mentorias;
     }
 
     public Long getId() {
