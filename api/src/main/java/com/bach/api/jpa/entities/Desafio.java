@@ -17,6 +17,10 @@ public class Desafio {
     @JoinColumn(name = "curso_id", nullable = false)
     private CursoMusical curso;
 
+    @ManyToOne
+    @JoinColumn(name = "mentoria_id", nullable = false)
+    private Mentoria mentoria;
+
     private String titulo;
     private String descripcion;
 

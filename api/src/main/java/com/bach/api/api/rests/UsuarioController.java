@@ -58,7 +58,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
-    @PutMapping("/actualizar-perfil")
+    @PutMapping("/actualizar-usuario")
     @Transactional
     public ResponseEntity<DTORespuestaUsuario> actualizaUsuario(@RequestHeader("Authorization") String token,
                                                                 @RequestBody DTOActualizacionUsuario datos){
