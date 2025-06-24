@@ -18,4 +18,12 @@ public class UsuarioMentoria {
     @ManyToOne
     @JoinColumn(name="usuario_id", nullable = false)
     private Usuario usuario;
+
+    public UsuarioMentoria(){}
+
+    public UsuarioMentoria(Mentoria mentoria, Usuario usuario, UsuarioMentoriaId key) {
+        this.id=key;
+        this.mentoria = mentoria;
+        this.usuario=usuario;
+    }
 }
