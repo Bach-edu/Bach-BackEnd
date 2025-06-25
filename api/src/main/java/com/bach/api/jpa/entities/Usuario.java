@@ -141,4 +141,8 @@ public class Usuario implements UserDetails {
     public void setActivoTrue() {
         this.activo = true;
     }
+
+    public boolean isActivo() {
+        return activo;
+    }
 }
