@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Tiempo Real</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        #messages {
+            margin-bottom: 20px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        #messageInput {
+            width: 80%;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        #sendButton {
+            padding: 10px 20px;
+        }
+        #userSelect {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Chat en Tiempo Real</h2>
+
+<!-- Selector de Usuario -->
+<label for="userSelect">Seleccionar Usuario:</label>
+<select id="userSelect">
+    <option value="usuario1">Usuario 1</option>
+    <option value="usuario2">Usuario 2</option>
+</select>
+
+<div id="messages"></div>
+
+<input type="text" id="messageInput" placeholder="Escribe un mensaje..." />
+<button id="sendButton">Enviar</button>
+
+
+<script>
+    const userSelect = document.getElementById('userSelect');
+    const sendButton = document.getElementById('sendButton');
+    const messageInput = document.getElementById('messageInput');
+    const messagesDiv = document.getElementById('messages');
+
+    let socket;
+    let username = userSelect.value;
+
+    const connectSocket = () => {
+        if (socket) socket.close();
+
+        socket = new WebSocket(`ws://localhost:8080/chat?username=${username}`);
+
+        socket.onopen = function () {
+            console.log('Conexión WebSocket establecida como ' + username);
+        };
+
+        socket.onerror = function (error) {
+            console.log('Error de WebSocket:', error);
+        };
+
+        socket.onclose = function (event) {
+            console.log('La conexión WebSocket se ha cerrado:', event);
+        };
+
+        socket.onmessage = function (event) {
+            const message = event.data;
+            const newMessageDiv = document.createElement('div');
+            newMessageDiv.textContent = 'Servidor: ' + message;
+            messagesDiv.appendChild(newMessageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        };
+    };
+
+    connectSocket();
+
+    userSelect.addEventListener('change', function () {
+        username = userSelect.value;
+        connectSocket();
+        console.log(`Usuario cambiado a: ${username}`);
+    });
+
+    sendButton.onclick = function () {
+        const message = messageInput.value;
+        if (message && socket.readyState === WebSocket.OPEN) {
+            const destinatario = username === 'usuario1' ? 'usuario2' : 'usuario1';
+
+            const payload = {
+                remitente: username,
+                destinatario: destinatario,
+                contenido: message
+            };
+
+            socket.send(JSON.stringify(payload));
+
+            const newMessageDiv = document.createElement('div');
+            newMessageDiv.textContent = `${username}: ${message}`;
+            messagesDiv.appendChild(newMessageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            messageInput.value = '';
+        }
+    };
+</script>
+
+
+</body>
+</html>

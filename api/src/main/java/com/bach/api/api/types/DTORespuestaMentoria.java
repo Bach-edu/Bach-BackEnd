@@ -1,4 +1,4 @@
-package com.bach.api.api.types;
+/*package com.bach.api.api.types;
 
 import com.bach.api.jpa.entities.Mentoria;
 import com.bach.api.jpa.entities.Video;
@@ -19,3 +19,4 @@ public record DTORespuestaMentoria(
                 mentoria.getCurso().getId(), mentoria.getTema() ,mentoria.getVideos(),mentoria.getFecha());
     }
 }
+ */
