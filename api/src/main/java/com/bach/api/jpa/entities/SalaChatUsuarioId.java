@@ -20,7 +20,6 @@ public class SalaChatUsuarioId implements Serializable {
         this.usuarioId = usuarioId;
     }
 
-    // getters y setters
 
     @Override
     public boolean equals(Object o) {

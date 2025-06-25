@@ -1,5 +1,7 @@
 package com.bach.api.jpa.entities;
 
+import com.bach.api.api.types.DTOActualizacionUsuario;
+import com.bach.api.api.types.DTORegistroUsuario;
 import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.InteresMusical;
 import com.bach.api.jpa.enums.Role;
@@ -7,7 +9,7 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
-@Entity(name = "usuario")
+@Entity
 @Table(name = "usuarios")
 public class Usuario {
     @Id
@@ -34,6 +36,34 @@ public class Usuario {
     @Column(name = "instrumento")
     Set<Instrumento> instrumentoDominados;
 
+    @OneToMany(mappedBy = "usuario")
+    private Set<SalaChatUsuario> salasChat;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UsuarioMentoria> mentorias;
+
+    @OneToOne(mappedBy = "usuario",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Perfil perfil = new Perfil(this);
+
+    private boolean activo;
+
+    public  Usuario(){}
+
+    public Usuario(DTORegistroUsuario datos, String passwordHash) {
+        this.username = datos.username();
+        this.nombreReal = datos.nombreReal();
+        this.email = datos.email();
+        this.passwordHash = passwordHash;
+        this.rol = Role.USUARIO;
+        this.intereses = datos.intereses();
+        this.instrumentoDominados = datos.instrumentoDominados();
+        this.perfil = new Perfil(this);
+        this.activo =true;
+    }
+
+
     public Long getId() {
         return id;
     }
@@ -46,6 +76,37 @@ public class Usuario {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void setPassEncode(String passEncrip) {
+        this.passwordHash = passEncrip;
+    }
+
+    public void actualizate(DTOActualizacionUsuario datos) {
+        if (datos.username() != null && !datos.username().isEmpty()) {
+            this.username = datos.username();
+        }if (datos.email() != null && !datos.email().isEmpty()){
+            this.email = datos.email();
+        }if (datos.nombreReal() != null && !datos.nombreReal().isEmpty()){
+            this.nombreReal = datos.nombreReal();
+        }if (datos.intereses() != null && !datos.intereses().isEmpty()){
+            this.intereses = datos.intereses();
+        }if (datos.instrumentoDominados() != null && !datos.instrumentoDominados().isEmpty()){
+            this.instrumentoDominados = datos.instrumentoDominados();
+        }
+    }
+
+    public void setActivoFalse() {
+        this.activo = false;
+    }
+
+    public void setActivoTrue() {
+        this.activo = true;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
     public String getNombreReal() {
         return nombreReal;
     }
@@ -69,5 +130,19 @@ public class Usuario {
     }
     public void setRol(Role rol) {
         this.rol = rol;
+    }
+
+    public void actualizaRol() {
+        this.setRol(com.bach.api.jpa.enums.Role.MENTOR);
+    }
+//Para que no de error DTORespuestaUsuario, cambiar esto
+    public Set<InteresMusical> getIntereses() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getIntereses'");
+    }
+
+    public Set<Instrumento> getInstrumentoDominados() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstrumentoDominados'");
     }
 }
