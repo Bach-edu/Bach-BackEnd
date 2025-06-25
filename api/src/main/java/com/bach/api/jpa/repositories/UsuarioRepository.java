@@ -21,4 +21,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
           AND u.activo = true
         """)
     Page<Usuario> findByMentorIdAndActivoTrue(@Param("usuarioId") Long usuarioId, Pageable pageable);
+
+    // Método para encontrar un usuario por su nombre de usuario
+    Usuario findByUsername(String username);
 }

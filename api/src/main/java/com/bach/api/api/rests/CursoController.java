@@ -1,8 +1,8 @@
-package com.bach.api.api.rests;
+/*package com.bach.api.api.rests;
 
 import com.bach.api.api.types.DTOActualizacionCurso;
 import com.bach.api.api.types.DTORegistroCurso;
-import com.bach.api.api.types.DTORespuestaCurso;
+//import com.bach.api.api.types.DTORespuestaCurso;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.CursoMusical;
 import com.bach.api.jpa.enums.Instrumento;
@@ -87,3 +87,4 @@ public class CursoController {
         return ResponseEntity.ok().build();
     }
 }
+*/

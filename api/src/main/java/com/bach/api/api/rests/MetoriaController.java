@@ -1,4 +1,4 @@
-package com.bach.api.api.rests;
+/*package com.bach.api.api.rests;
 
 import com.bach.api.api.types.DTOActualizacionMentoria;
 import com.bach.api.api.types.DTORegistroMentoria;
@@ -86,3 +86,4 @@ public class MetoriaController {
         return ResponseEntity.ok(mentorias);
     }
 }
+*/
