@@ -19,11 +19,17 @@ public class UsuarioMentoria {
     @JoinColumn(name="usuario_id", nullable = false)
     private Usuario usuario;
 
+    private boolean completada;
+
     public UsuarioMentoria(){}
 
     public UsuarioMentoria(Mentoria mentoria, Usuario usuario, UsuarioMentoriaId key) {
         this.id=key;
         this.mentoria = mentoria;
         this.usuario=usuario;
+    }
+
+    public void terminar() {
+        this.completada = true;
     }
 }

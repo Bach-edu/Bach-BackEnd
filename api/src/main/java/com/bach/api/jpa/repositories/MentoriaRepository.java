@@ -20,4 +20,6 @@ public interface MentoriaRepository extends JpaRepository<Mentoria, Long> {
     Page<Mentoria> findByUsuarioId(
             @Param("usuarioId") Long usuarioId,
             Pageable pageable);
+
+    int countByCursoId(Long idCurso);
 }
