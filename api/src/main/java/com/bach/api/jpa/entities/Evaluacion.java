@@ -5,7 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "evaluacion")
+@Entity
 @Table(name = "evaluaciones")
 public class Evaluacion {
     @Id
@@ -19,6 +19,9 @@ public class Evaluacion {
     @ManyToOne
     @JoinColumn(name = "desafio_id")
     private Desafio desafio;
+
+    @ManyToOne @JoinColumn(name = "video_id")
+    private Video video;
 
     @ManyToOne
     @JoinColumn(name = "mentoria_id")

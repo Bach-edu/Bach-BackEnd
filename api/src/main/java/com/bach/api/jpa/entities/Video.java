@@ -25,6 +25,9 @@ public class Video {
     @ManyToMany(mappedBy = "videos")
     private Set<Mentoria> mentorias = new HashSet<>();
 
+    @ManyToMany(mappedBy = "videos")
+    private Set<Desafio> desafios = new HashSet<>();
+
     @CurrentTimestamp
     private LocalDateTime fechaDeSubida;
 

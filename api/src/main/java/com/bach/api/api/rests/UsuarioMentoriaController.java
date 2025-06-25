@@ -54,17 +54,25 @@ public class UsuarioMentoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/mentoria-completada")
+    @PutMapping("/mentoria-completada/{idMentoria}")
     @Transactional
-    public ResponseEntity completarMentoria(@RequestHeader("Authorization") String token){
+    public ResponseEntity<?> completarUnaMentoria(
+            @PathVariable Long idMentoria,
+            @RequestHeader("Authorization") String token
+    ) {
         var usuarioId = tokenService.getClaimId(token);
-        var usuarioMentoriaOptional = repository.findByUsuarioId(usuarioId);
-        if ( usuarioMentoriaOptional.isEmpty()){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        var key = new UsuarioMentoriaId(idMentoria, usuarioId);
+
+        var usuarioMentoriaOptional = repository.findById(key);
+        if (usuarioMentoriaOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No estás inscrito en la mentoría " + idMentoria);
         }
         var usuarioMentoria = usuarioMentoriaOptional.get();
         usuarioMentoria.terminar();
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        repository.save(usuarioMentoria);
+
+        return ResponseEntity.ok("Mentoría " + idMentoria + " marcada como completada.");
     }
 
     @PutMapping("/completar-curso/{idCurso}")
