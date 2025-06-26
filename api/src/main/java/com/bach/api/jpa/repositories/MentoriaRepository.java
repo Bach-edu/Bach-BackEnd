@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MentoriaRepository extends JpaRepository<Mentoria, Long> {
-<<<<<<< Updated upstream
     Page<Mentoria> findByMentorNombreRealContainingIgnoreCase(String nombre, Pageable pageable);
 
     Page<Mentoria> findByCursoId(Long idCurso, Pageable pageable);
@@ -23,7 +22,4 @@ public interface MentoriaRepository extends JpaRepository<Mentoria, Long> {
             Pageable pageable);
 
     int countByCursoId(Long idCurso);
-=======
-    Page<Mentoria> findByMentorNombreRealContainingIgnoreCasefi(String nombre, Pageable pageable);
->>>>>>> Stashed changes
 }
