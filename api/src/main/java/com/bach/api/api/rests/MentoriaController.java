@@ -1,4 +1,4 @@
-/*package com.bach.api.api.rests;
+package com.bach.api.api.rests;
 
 import com.bach.api.api.types.DTOActualizacionMentoria;
 import com.bach.api.api.types.DTORegistroMentoria;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mentoria")
-public class MetoriaController {
+public class MentoriaController {
 
     @Autowired
     private MentoriaRepository repository;
@@ -86,4 +86,3 @@ public class MetoriaController {
         return ResponseEntity.ok(mentorias);
     }
 }
-*/

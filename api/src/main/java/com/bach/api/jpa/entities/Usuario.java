@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -73,10 +73,6 @@ public class Usuario {
 
     public Perfil getPerfil() {
         return perfil;
-    }
-
-    public boolean isActivo() {
-        return activo;
     }
 
     public Long getId() {

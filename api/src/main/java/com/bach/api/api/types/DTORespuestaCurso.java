@@ -1,4 +1,4 @@
-/*package com.bach.api.api.types;
+package com.bach.api.api.types;
 
 import com.bach.api.jpa.entities.CursoMusical;
 import com.bach.api.jpa.enums.Instrumento;
@@ -10,11 +10,10 @@ public record DTORespuestaCurso(
          String titulo,
          String descripcion,
          Instrumento instrumentoBase,
-         //List<DTORespuestaMentoria> mentorias
+         List<DTORespuestaMentoria> mentorias
 ) {
-    / public DTORespuestaCurso(CursoMusical curso) {
+    public DTORespuestaCurso(CursoMusical curso) {
         this(curso.getId(), curso.getTitulo(), curso.getDescripcion(), curso.getInstrumentoBase(),
                 curso.getMentorias().stream().map(DTORespuestaMentoria::new).toList());
     }
 }
-*/
