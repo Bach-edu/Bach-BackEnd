@@ -1,9 +1,12 @@
 package com.bach.api.jpa.entities;
 
+import com.bach.api.api.types.DTOActualizacionEvaluacion;
+import com.bach.api.api.types.DTORegistroEvaluacion;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "evaluaciones")
@@ -32,4 +35,56 @@ public class Evaluacion {
 
     @CreationTimestamp
     private LocalDateTime fecha;
+
+    public Evaluacion(){}
+
+    public Evaluacion(Usuario usuario, Desafio desafio, Video video ,DTORegistroEvaluacion datos) {
+        this.evaluador = usuario;
+        this.desafio=desafio;
+        this.video = video;
+        this.mentoria=desafio.getMentoria();
+        this.puntuacion = datos.puntuacion();
+        this.comentario = datos.comentario();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Usuario getEvaluador() {
+        return evaluador;
+    }
+
+    public Desafio getDesafio() {
+        return desafio;
+    }
+
+    public Video getVideo() {
+        return video;
+    }
+
+    public Mentoria getMentoria() {
+        return mentoria;
+    }
+
+    public double getPuntuacion() {
+        return puntuacion;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
+
+    public void actualiza(DTOActualizacionEvaluacion datos) {
+        if(datos.puntuacion() >= 0){
+            this.puntuacion=datos.puntuacion();
+        }
+        if(datos.comentario() != null || !datos.comentario().isEmpty()){
+            this.comentario = datos.comentario();
+        }
+    }
 }

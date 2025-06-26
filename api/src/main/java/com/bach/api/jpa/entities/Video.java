@@ -22,6 +22,10 @@ public class Video {
     private String descripcion;
     private int duracion;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario uploader;
+
     @ManyToMany(mappedBy = "videos")
     private Set<Mentoria> mentorias = new HashSet<>();
 
@@ -33,11 +37,16 @@ public class Video {
 
     public  Video(){}
 
-    public Video(DTORegistroVideo datos) {
+    public Video(DTORegistroVideo datos, Usuario usuario) {
         this.titulo = datos.titulo();
         this.url = datos.url();
         this.descripcion = datos.descripcion();
         this.duracion = datos.duracion();
+        this.uploader = usuario;
+    }
+
+    public Usuario getUploader() {
+        return uploader;
     }
 
     public Long getId() {
@@ -58,6 +67,10 @@ public class Video {
 
     public int getDuracion() {
         return duracion;
+    }
+
+    public Set<Desafio> getDesafios() {
+        return desafios;
     }
 
     public Set<Mentoria> getMentorias() {

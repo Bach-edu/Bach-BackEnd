@@ -9,6 +9,7 @@ import java.util.List;
 
 public record DTORespuestaVideo(
          Long id,
+         DTORespuestaUsuario uploader,
          String titulo,
          String url,
          String descripcion,
@@ -17,7 +18,7 @@ public record DTORespuestaVideo(
          LocalDateTime fechaDeSubida
 ) {
     public DTORespuestaVideo(Video video) {
-        this(video.getId(), video.getTitulo(), video.getUrl(),
+        this(video.getId(), new DTORespuestaUsuario(video.getUploader()),video.getTitulo(), video.getUrl(),
                 video.getDescripcion(), video.getDuracion(),
                 video.getMentorias().stream().map(Mentoria::getId).toList(),video.getFechaDeSubida());
     }

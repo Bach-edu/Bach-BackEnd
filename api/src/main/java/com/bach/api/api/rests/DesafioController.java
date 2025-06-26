@@ -8,6 +8,7 @@ import com.bach.api.jpa.entities.Desafio;
 import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.DesafioRepository;
 import com.bach.api.jpa.repositories.MentoriaRepository;
+import com.bach.api.jpa.repositories.UsuarioMentoriaRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class DesafioController {
 
     @Autowired
     private MentoriaRepository mentoriaRepository;
+
+    @Autowired
+    private UsuarioMentoriaRepository usuarioMentoriaRepository;
 
     @PostMapping("/crear-desafio/{mentoriaId}")
     public ResponseEntity<DTORespuestaDesafio> crearDesafio(@PathVariable Long mentoriaId, @RequestBody DTORegistroDesafio datos,
@@ -82,6 +86,21 @@ public class DesafioController {
         var desafios = repository.findByMentoriaId(idMentoria,pageable).map(DTORespuestaDesafio::new);
         if (desafios.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(desafios);
+    }
+
+    @GetMapping("/desafios-por-mentoria-completada/{idMentoria}")
+    public ResponseEntity<Page<DTORespuestaDesafio>> listarDesafiosPorMentoriaCompletada(@PathVariable Long idMentoria, Pageable pageable,
+                                                                                         @RequestHeader("Authorization")String token){
+        var desafios = repository.findByMentoriaId(idMentoria,pageable).map(DTORespuestaDesafio::new);
+        var usuarioId = tokenService.getClaimId(token);
+        if (desafios.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        var completado = usuarioMentoriaRepository.existsByMentoriaIdAndUsuarioIdAndCompletadaTrue(idMentoria,usuarioId);
+        if (!completado){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         return ResponseEntity.ok(desafios);
     }

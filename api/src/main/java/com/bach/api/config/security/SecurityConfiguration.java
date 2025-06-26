@@ -53,7 +53,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .authorizeHttpRequests(req -> {
                         req.requestMatchers(HttpMethod.POST, "/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/usuarios/registrar").permitAll()
-                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                                .requestMatchers("/chat/**").permitAll();
                         req.anyRequest().authenticated();
                     })
                     // Inserta el filtro de seguridad JWT antes del filtro de autenticación por formularios

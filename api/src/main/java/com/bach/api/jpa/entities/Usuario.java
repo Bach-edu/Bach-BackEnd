@@ -68,6 +68,21 @@ public class Usuario implements UserDetails {
         this.activo =true;
     }
 
+    public Set<SalaChatUsuario> getSalasChat() {
+        return salasChat;
+    }
+
+    public Set<UsuarioMentoria> getMentorias() {
+        return mentorias;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
 
     public Long getId() {
         return id;
