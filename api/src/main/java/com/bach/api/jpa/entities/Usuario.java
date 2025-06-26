@@ -6,12 +6,17 @@ import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.InteresMusical;
 import com.bach.api.jpa.enums.Role;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -130,7 +135,13 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPasswordHash() {
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_"+this.rol.name()));
+    }
+
+    public String getPassword() {
         return passwordHash;
     }
     public void setPasswordHash(String passwordHash) {
@@ -147,13 +158,13 @@ public class Usuario {
         this.setRol(com.bach.api.jpa.enums.Role.MENTOR);
     }
 //Para que no de error DTORespuestaUsuario, cambiar esto
+
+
     public Set<InteresMusical> getIntereses() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getIntereses'");
+        return intereses;
     }
 
     public Set<Instrumento> getInstrumentoDominados() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getInstrumentoDominados'");
+        return instrumentoDominados;
     }
 }

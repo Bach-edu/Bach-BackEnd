@@ -23,7 +23,7 @@ public class Video {
     private int duracion;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "uploader_id")
     private Usuario uploader;
 
     @ManyToMany(mappedBy = "videos")

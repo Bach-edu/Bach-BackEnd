@@ -77,8 +77,9 @@ public class VideoController {
         var desafio = desafioOptional.get();
         var usuario = usuarioOptional.get();
         var video = new  Video(datos, usuario);
-        video.getDesafios().add(desafio);
         repository.save(video);
+        desafio.getVideos().add(video);
+        desafioRepository.save(desafio);
         var datosRespuesta = new DTORespuestaVideo(video);
         return ResponseEntity.ok(datosRespuesta);
     }
@@ -108,6 +109,22 @@ public class VideoController {
          return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
      }
      return ResponseEntity.ok(videos);
+    }
+
+    //videos que evaluara el mentor
+
+    @GetMapping("/videos-por-desafio/{idDesafio}")
+    public ResponseEntity<Page<DTORespuestaVideo>> obtenVideosPorDesafio(@PathVariable Long idDesafio, Pageable pageable
+    ,@RequestHeader("Authorization") String token){
+        var rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
+        if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        var videos = repository.findByDesafiosId(idDesafio, pageable).map(DTORespuestaVideo::new);
+        if (videos.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(videos);
     }
 
     @GetMapping("/videos-por-nombre/{video}")
