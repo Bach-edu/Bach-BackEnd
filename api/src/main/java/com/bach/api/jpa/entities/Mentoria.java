@@ -26,7 +26,7 @@ public class Mentoria {
 
     private String tema;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "mentoria_video",
             joinColumns = @JoinColumn(name = "mentoria_id"),
@@ -71,7 +71,7 @@ public class Mentoria {
     }
 
     public void actualiza(DTOActualizacionMentoria datos) {
-        if (datos.tema() != null && datos.tema().isEmpty()){
+        if (datos.tema() != null && !datos.tema().isEmpty()){
             this.tema = datos.tema();
         }
 

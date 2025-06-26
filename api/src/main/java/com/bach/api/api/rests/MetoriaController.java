@@ -9,6 +9,7 @@ import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.CursoRepository;
 import com.bach.api.jpa.repositories.MentoriaRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mentoria")
+@SecurityRequirement(name = "bearer-key")
 public class MetoriaController {
 
     @Autowired
@@ -62,7 +64,7 @@ public class MetoriaController {
     @PutMapping("/actualizar/{idMentoria}")
     @Transactional
     public ResponseEntity<DTORespuestaMentoria> actualizaMentoria(@PathVariable Long idMentoria,
-                                                                  @RequestHeader("Authorization") String token, DTOActualizacionMentoria datos){
+                                                                  @RequestHeader("Authorization") String token,@RequestBody DTOActualizacionMentoria datos){
         var rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
         if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
@@ -77,13 +79,46 @@ public class MetoriaController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
-    @GetMapping("/curso-por-mentor/{nombre}")
+    @GetMapping("/mentoria-por-mentor/{nombre}")
     public ResponseEntity<Page<DTORespuestaMentoria>> obtenMentoriasPorMentor(@PathVariable String nombre, Pageable pageable){
         var mentorias = repository.findByMentorNombreRealContainingIgnoreCase(nombre,pageable).map(DTORespuestaMentoria::new);
         if (mentorias.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(mentorias);
+    }
+
+    @GetMapping("/todas-mentorias")
+    public ResponseEntity<Page<DTORespuestaMentoria>> obtenTodasMentorias(Pageable pageable){
+        var mentorias = repository.findAll(pageable).map(DTORespuestaMentoria::new);
+        if (mentorias.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(mentorias);
+    }
+
+    @GetMapping("/mentoria-por-curso/{idCurso}")
+    public ResponseEntity<Page<DTORespuestaMentoria>> obtenMentoriasPorCurso(@PathVariable Long idCurso, Pageable pageable){
+        var mentorias = repository.findByCursoId(idCurso,pageable).map(DTORespuestaMentoria::new);
+        if (mentorias.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(mentorias);
+    }
+
+    @DeleteMapping("/{idMentoria}")
+    public ResponseEntity borraMentoria(@PathVariable Long idMentoria, @RequestHeader("Authorization") String token){
+        var rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
+        if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        var mentoriaOptional = repository.findById(idMentoria);
+        if (mentoriaOptional.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        var mentoria = mentoriaOptional.get();
+        repository.delete(mentoria);
+        return ResponseEntity.ok().build();
     }
 }
 */

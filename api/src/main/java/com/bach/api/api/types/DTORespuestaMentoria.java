@@ -1,22 +1,21 @@
 /*package com.bach.api.api.types;
 
 import com.bach.api.jpa.entities.Mentoria;
-import com.bach.api.jpa.entities.Video;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 public record DTORespuestaMentoria(
          Long id,
-         DTORespuestaUsuario mentor,
+         DTOResumenUsuario mentor,
          Long cursoId,
          String tema,
-         Set<Video> videos,
+         List<DTOResumenVideo> videos,
          LocalDateTime fecha
 ) {
     public DTORespuestaMentoria(Mentoria mentoria) {
-        this(mentoria.getId(), new DTORespuestaUsuario(mentoria.getMentor()),
-                mentoria.getCurso().getId(), mentoria.getTema() ,mentoria.getVideos(),mentoria.getFecha());
+        this(mentoria.getId(), new DTOResumenUsuario(mentoria.getMentor()),
+                mentoria.getCurso().getId(), mentoria.getTema() ,mentoria.getVideos().stream().map(DTOResumenVideo::new).toList(),mentoria.getFecha());
     }
 }
  */
