@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "chat_mensaje")
 public class ChatMensaje {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne

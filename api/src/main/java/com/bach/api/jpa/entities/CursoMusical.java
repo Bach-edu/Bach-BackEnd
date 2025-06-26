@@ -4,7 +4,6 @@ import com.bach.api.api.types.DTOActualizacionCurso;
 import com.bach.api.api.types.DTORegistroCurso;
 import com.bach.api.jpa.enums.Instrumento;
 import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +25,9 @@ public class CursoMusical {
             orphanRemoval = true)
     private Set<Mentoria> mentorias;
 
-    public CursoMusical(){}
+    public CursoMusical() {
+        this.mentorias = new HashSet<>();
+    }
 
     public CursoMusical(DTORegistroCurso datos) {
         this.titulo = datos.titulo();
@@ -55,14 +56,26 @@ public class CursoMusical {
         return instrumentoBase;
     }
 
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setInstrumentoBase(Instrumento instrumentoBase) {
+        this.instrumentoBase = instrumentoBase;
+    }
+
     public void actualizate(DTOActualizacionCurso datos) {
-        if (datos.titulo() != null && !datos.titulo().isEmpty()){
+        if (datos.titulo() != null && !datos.titulo().isEmpty()) {
             this.titulo = datos.titulo();
         }
-        if (datos.descripcion() != null && !datos.descripcion().isEmpty()){
-                this.descripcion = datos.descripcion();
+        if (datos.descripcion() != null && !datos.descripcion().isEmpty()) {
+            this.descripcion = datos.descripcion();
         }
-        if (datos.instrumentoBase() != null){
+        if (datos.instrumentoBase() != null) {
             this.instrumentoBase = datos.instrumentoBase();
         }
     }

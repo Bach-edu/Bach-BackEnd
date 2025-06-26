@@ -6,19 +6,14 @@ import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.InteresMusical;
 import com.bach.api.jpa.enums.Role;
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements UserDetails {
+public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String username;
@@ -30,15 +25,15 @@ public class Usuario implements UserDetails {
     private Role rol;
 
     @ElementCollection(targetClass = InteresMusical.class)
-            @Enumerated(EnumType.STRING)
-            @CollectionTable(name = "usuario_intereses", joinColumns = @JoinColumn(name = "usuario_id"))
-            @Column(name = "interes")
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "usuario_intereses", joinColumns = @JoinColumn(name = "usuario_id"))
+    @Column(name = "interes")
     Set<InteresMusical> intereses;
 
     @ElementCollection(targetClass = Instrumento.class)
-            @Enumerated(EnumType.STRING)
-            @CollectionTable(name = "usuario_instrumentos", joinColumns = @JoinColumn(name = "usuario_id"))
-            @Column(name = "instrumento")
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "usuario_instrumentos", joinColumns = @JoinColumn(name = "usuario_id"))
+    @Column(name = "instrumento")
     Set<Instrumento> instrumentoDominados;
 
     @OneToMany(mappedBy = "usuario")
@@ -87,48 +82,14 @@ public class Usuario implements UserDetails {
     public Long getId() {
         return id;
     }
-
-    public String getNombreReal() {
-        return nombreReal;
+    public void setId(Long id) {
+        this.id = id;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public Role getRol() {
-        return rol;
-    }
-
-    public Set<InteresMusical> getIntereses() {
-        return intereses;
-    }
-
-    public Set<Instrumento> getInstrumentoDominados() {
-        return instrumentoDominados;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_"+this.rol.name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return passwordHash;
-    }
-
-    @Override
     public String getUsername() {
         return username;
     }
-
-    public void actualizaRol() {
-        this.rol=Role.MENTOR;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassEncode(String passEncrip) {
@@ -155,5 +116,48 @@ public class Usuario implements UserDetails {
 
     public void setActivoTrue() {
         this.activo = true;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public String getNombreReal() {
+        return nombreReal;
+    }
+    public void setNombreReal(String nombreReal) {
+        this.nombreReal = nombreReal;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+    public Role getRol() {
+        return rol;
+    }
+    public void setRol(Role rol) {
+        this.rol = rol;
+    }
+
+    public void actualizaRol() {
+        this.setRol(com.bach.api.jpa.enums.Role.MENTOR);
+    }
+//Para que no de error DTORespuestaUsuario, cambiar esto
+    public Set<InteresMusical> getIntereses() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getIntereses'");
+    }
+
+    public Set<Instrumento> getInstrumentoDominados() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getInstrumentoDominados'");
     }
 }
