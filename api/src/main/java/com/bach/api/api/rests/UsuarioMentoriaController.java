@@ -37,6 +37,7 @@ public class UsuarioMentoriaController {
     @Autowired
     private CursoRepository cursoRepository;
 
+    //inscribirte en mentoria
     @PostMapping("/{idMentoria}/inscribir")
     public ResponseEntity inscribirEnMentoria(@PathVariable Long idMentoria, @RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
@@ -54,6 +55,7 @@ public class UsuarioMentoriaController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    //completar mentoria
     @PutMapping("/mentoria-completada/{idMentoria}")
     @Transactional
     public ResponseEntity<?> completarUnaMentoria(
@@ -75,6 +77,7 @@ public class UsuarioMentoriaController {
         return ResponseEntity.ok("Mentoría " + idMentoria + " marcada como completada.");
     }
 
+    //si todas las mentorias estan completadas completas el curso
     @PutMapping("/completar-curso/{idCurso}")
     @Transactional
     public ResponseEntity completarCurso(@PathVariable Long idCurso ,@RequestHeader("Authorization") String token){
@@ -97,6 +100,7 @@ public class UsuarioMentoriaController {
 
     }
 
+    //muestra tus mentorias inscritas
     @GetMapping("/inscritas")
     public ResponseEntity<Page<DTORespuestaMentoria>> obtenMentoriasIscritas(@RequestHeader("Authorization") String token,
                                                                              Pageable pageable){

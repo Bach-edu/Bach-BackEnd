@@ -29,6 +29,7 @@ public class CursoController {
     @Autowired
     private TokenService tokenService;
 
+    //aqui el entor crea un curso
     @PostMapping("/registrar")
     public ResponseEntity<DTORespuestaCurso> registraCurso(@RequestBody DTORegistroCurso datos,
                                                            @RequestHeader("Authorization") String token){
@@ -42,6 +43,7 @@ public class CursoController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //aqui el mentor actualiza los cursos
     @PutMapping("/actualizar-curso/{idCurso}")
     @Transactional
     public ResponseEntity<DTORespuestaCurso> actualizaCurso(@PathVariable Long idCurso ,@RequestBody DTOActualizacionCurso datos,
@@ -60,12 +62,14 @@ public class CursoController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //obteneos todos los cursos
     @GetMapping("/todos-cursos")
     public ResponseEntity<Page<DTORespuestaCurso>> obtenerCursos(Pageable pageable){
         var cursos = repository.findAll(pageable).map(DTORespuestaCurso::new);
         return ResponseEntity.ok(cursos);
     }
 
+    //cursos filtrados por instrumento debemos mandar un parametro en la url
     @GetMapping("/cursos-por-instrumento")
     public ResponseEntity<Page<DTORespuestaCurso>> obtenerCursosPorIstrumento(Pageable pageable, @RequestParam String instrumentoBase){
         Instrumento instrumento = Instrumento.valueOf(instrumentoBase.toUpperCase());
@@ -73,6 +77,7 @@ public class CursoController {
         return ResponseEntity.ok(cursos);
     }
 
+    //borra el cirso que mandas en el id es un delete total
     @DeleteMapping("/borrar-curso/{idCurso}")
     public ResponseEntity borrarCurso(@PathVariable Long idCurso, @RequestHeader("Authorization") String token){
         Role rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));

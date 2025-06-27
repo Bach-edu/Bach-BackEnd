@@ -34,6 +34,7 @@ public class UsuarioController {
     @Autowired
     private TokenService tokenService;
 
+    //registro de usuario no es necesario token
     @PostMapping("/registrar")
     public ResponseEntity<DTORespuestaUsuario> registraUsuario(@Valid @RequestBody DTORegistroUsuario datos){
         var pass = encoder.encode(datos.password());
@@ -43,6 +44,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //actualizar perfil a mentor
     @PutMapping("/registrar-mentor")
     @Transactional
     public ResponseEntity<DTORespuestaUsuario> registraMentor(@RequestHeader("Authorization") String token){
@@ -58,6 +60,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //actualizar demas datos
     @PutMapping("/actualizar-usuario")
     @Transactional
     public ResponseEntity<DTORespuestaUsuario> actualizaUsuario(@RequestHeader("Authorization") String token,
@@ -77,6 +80,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //reactiva cuenta si se desactiva
     @PutMapping("/reactivar-cuenta")
     @Transactional
     public ResponseEntity<DTORespuestaUsuario> reactivarUsuario(@RequestHeader("Authorization") String token){
@@ -91,6 +95,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datos);
     }
 
+    //obtiene solo tu informacion
     @GetMapping("/me")
     public ResponseEntity<DTORespuestaUsuario> consultaUsuario(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
@@ -103,6 +108,7 @@ public class UsuarioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //lista de alumnos de mentor
     @GetMapping("/alumnos")
     public ResponseEntity<Page<DTORespuestaUsuario>> obtenAlumnos(@RequestHeader("Authorization") String token,
                                                                   Pageable pageable){
@@ -118,6 +124,7 @@ public class UsuarioController {
         return ResponseEntity.ok(alumnos);
     }
 
+    //desactivar cuenta
     @DeleteMapping("/desactivar-cuenta")
     @Transactional
     public ResponseEntity desactivarUsuario(@RequestHeader("Authorization") String token){
@@ -131,6 +138,7 @@ public class UsuarioController {
         return ResponseEntity.ok().build();
     }
 
+    //borrado total
     @DeleteMapping("/borrar-cuenta")
     public ResponseEntity borrarUsuario(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);

@@ -5,7 +5,7 @@ import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.CursoMusical;
 import com.bach.api.jpa.entities.Notification;
 import com.bach.api.jpa.entities.Usuario;
-import com.bach.api.jpa.repositories.CursoMusicalRepository;
+import com.bach.api.jpa.repositories.CursoRepository;
 import com.bach.api.jpa.repositories.NotificationRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class CursoMusicalController {
 
     @Autowired
-    private CursoMusicalRepository repository;
+    private CursoRepository repository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;

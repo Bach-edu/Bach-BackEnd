@@ -23,6 +23,7 @@ public class PerfilController {
     private TokenService tokenService;
 
 
+    //el perfil se crea con datos independietes
     @PutMapping("/actualizar")
     @Transactional
     public ResponseEntity<DTORespuestaPerfil> actualizaPerfil(@RequestBody DTOActualizacionPerfil datos,
@@ -38,6 +39,7 @@ public class PerfilController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //obtener tu perfil con tu token
     @GetMapping("/obtener-perfil")
     public ResponseEntity<DTORespuestaPerfil> obtienePerfil(@RequestHeader("Authorization") String token){
         var usuarioId = tokenService.getClaimId(token);
@@ -50,6 +52,7 @@ public class PerfilController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //obtener perfil de usuario x con su id de perfil
     @GetMapping("/obtener-perfil/{usuarioId}")
     public ResponseEntity<DTORespuestaPerfil> obtienePerfilPorId (@PathVariable Long usuarioId, @RequestHeader("Authorization") String token){
         var perfilOptional = repository.findByUsuarioId(usuarioId);

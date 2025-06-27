@@ -35,6 +35,7 @@ public class DesafioController {
     @Autowired
     private UsuarioMentoriaRepository usuarioMentoriaRepository;
 
+    //los desafis se crean con las mentorias
     @PostMapping("/crear-desafio/{mentoriaId}")
     public ResponseEntity<DTORespuestaDesafio> crearDesafio(@PathVariable Long mentoriaId, @RequestBody DTORegistroDesafio datos,
                                                             @RequestHeader ("Authorization") String token){
@@ -54,6 +55,7 @@ public class DesafioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //se pueden actualizar solo los tatos del DTO
     @PutMapping("/actualizar-desafio/{idDesafio}")
     @Transactional
     public ResponseEntity<DTORespuestaDesafio> actualizaDesafio(@PathVariable Long idDesafio,
@@ -72,6 +74,7 @@ public class DesafioController {
         return ResponseEntity.ok(datosRespuesta);
     }
 
+    //listar todos los desafios
     @GetMapping("/todos-los-desafios")
     public ResponseEntity<Page<DTORespuestaDesafio>> listarDesafios(Pageable pageable){
         var desafios = repository.findAll(pageable).map(DTORespuestaDesafio::new);
@@ -81,6 +84,7 @@ public class DesafioController {
         return ResponseEntity.ok(desafios);
     }
 
+    //listar desafios por mentoria
     @GetMapping("/desafios-por-mentoria/{idMentoria}")
     public ResponseEntity<Page<DTORespuestaDesafio>> listarDesafiosPorMentoria(@PathVariable Long idMentoria, Pageable pageable){
         var desafios = repository.findByMentoriaId(idMentoria,pageable).map(DTORespuestaDesafio::new);
@@ -90,6 +94,7 @@ public class DesafioController {
         return ResponseEntity.ok(desafios);
     }
 
+    //lista los desafios de las mentorias que ya terminaste
     @GetMapping("/desafios-por-mentoria-completada/{idMentoria}")
     public ResponseEntity<Page<DTORespuestaDesafio>> listarDesafiosPorMentoriaCompletada(@PathVariable Long idMentoria, Pageable pageable,
                                                                                          @RequestHeader("Authorization")String token){
@@ -105,6 +110,7 @@ public class DesafioController {
         return ResponseEntity.ok(desafios);
     }
 
+    //lista los desafios del curso
     @GetMapping("/desafios-por-curso/{idCurso}")
     public ResponseEntity<Page<DTORespuestaDesafio>> listarDesafiosPorcurso(@PathVariable Long idCurso, Pageable pageable){
         var desafios = repository.findByCursoId(idCurso,pageable).map(DTORespuestaDesafio::new);
@@ -114,6 +120,7 @@ public class DesafioController {
         return ResponseEntity.ok(desafios);
     }
 
+    //borra totalmete los desafios de la db
     @DeleteMapping("/{idDesafio}")
     public ResponseEntity borraDesafio(@PathVariable Long idDesafio, @RequestHeader("Authorization") String token){
         Role rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
