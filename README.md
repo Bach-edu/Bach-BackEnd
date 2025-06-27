@@ -93,8 +93,8 @@ La API está protegida por roles: **ADMIN**, **MENTOR**, **USER**, y algunas rut
 * 🎓 Desarrollo completo del sistema de certificados.
 * 🤝 Participación clave en el sistema de chat.
 
-**GitHub**: \[pendiente]
-**LinkedIn**: \[pendiente]
+**GitHub**: \[https://github.com/John-Vivas]
+**LinkedIn**: \[https://www.linkedin.com/in/john-e-vivas]
 
 ---
 
