@@ -1,0 +1,8 @@
+CREATE TABLE video(
+    id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    url VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    duracion INTEGER NOT NULL,
+    fecha_de_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
