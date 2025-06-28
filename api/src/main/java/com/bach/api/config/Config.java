@@ -15,7 +15,7 @@ public class Config implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:5173", "http://localhost:5173")
+                .allowedOrigins("http://127.0.0.1:5173", "http://localhost:5173", "https://bach-front-end.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true);
@@ -23,8 +23,9 @@ public class Config implements WebMvcConfigurer {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+        //, "https://bach-front-end.vercel.app"
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5173", "http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of("http://127.0.0.1:5173", "http://localhost:5173", "https://bach-front-end.vercel.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
