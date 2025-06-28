@@ -13,4 +13,4 @@ RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
 # Ejecuta la aplicación Spring Boot
-CMD ["java", "-jar", "api/target/api-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/api-0.0.1-SNAPSHOT.jar"]
