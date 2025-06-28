@@ -1,14 +1,16 @@
-# Usa una imagen oficial de Java 17
 FROM eclipse-temurin:17-jdk
 
-# Crea el directorio de trabajo
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia el jar generado desde la carpeta api
-COPY api/target/api-0.0.1-SNAPSHOT.jar app.jar
+# Copia todo el contenido del proyecto (incluye pom.xml, src/, mvnw, etc.)
+COPY . .
 
-# Expone el puerto por defecto de Spring Boot
-EXPOSE 8080
+# Da permisos de ejecución al wrapper de Maven
+RUN chmod +x ./mvnw
 
-# Ejecuta la aplicación
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Compila el proyecto y genera el JAR
+RUN ./mvnw clean package -DskipTests
+
+# Ejecuta la aplicación Spring Boot
+CMD ["java", "-jar", "api/target/api-0.0.1-SNAPSHOT.jar"]
