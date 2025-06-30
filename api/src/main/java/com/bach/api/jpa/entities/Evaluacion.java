@@ -16,7 +16,7 @@ public class Evaluacion {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "evaluador_id",nullable = false)
+    @JoinColumn(name = "evauador_id",nullable = false)
     private Usuario evaluador;
 
     @ManyToOne
@@ -83,7 +83,7 @@ public class Evaluacion {
         if(datos.puntuacion() >= 0){
             this.puntuacion=datos.puntuacion();
         }
-        if(datos.comentario() != null || !datos.comentario().isEmpty()){
+        if(datos.comentario() != null && !datos.comentario().isEmpty()){
             this.comentario = datos.comentario();
         }
     }

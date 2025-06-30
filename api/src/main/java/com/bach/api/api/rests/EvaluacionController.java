@@ -100,7 +100,7 @@ public class EvaluacionController {
     public ResponseEntity<Page<DTORespuestaEvaluacion>> muestraEvaluacionesDelUsuario(@RequestHeader("Authorization") String token,
                                                                                      Pageable pageable){
         var usuarioId = tokenService.getClaimId(token);
-        var evaluaciones = repository.findByEvaluadorId(usuarioId, pageable).map(DTORespuestaEvaluacion::new);
+        var evaluaciones = repository.findByVideoUploaderId(usuarioId, pageable).map(DTORespuestaEvaluacion::new);
         return ResponseEntity.ok(evaluaciones);
     }
 
