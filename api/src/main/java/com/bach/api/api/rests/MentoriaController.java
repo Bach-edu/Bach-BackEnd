@@ -5,10 +5,15 @@ import com.bach.api.api.types.DTORegistroMentoria;
 import com.bach.api.api.types.DTORespuestaMentoria;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.Mentoria;
+import com.bach.api.jpa.entities.Notification;
+import com.bach.api.jpa.entities.Usuario;
+import com.bach.api.jpa.entities.UsuarioMentoria;
 import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.CursoRepository;
 import com.bach.api.jpa.repositories.MentoriaRepository;
+import com.bach.api.jpa.repositories.NotificationRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mentoria")
+@SecurityRequirement(name = "bearer-key")
 public class MentoriaController {
 
     @Autowired
@@ -29,6 +35,9 @@ public class MentoriaController {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Autowired
     private TokenService tokenService;
@@ -57,6 +66,15 @@ public class MentoriaController {
         var mentoria = new Mentoria(datos, usuario, curso);
         repository.save(mentoria);
         var datosRetorno = new DTORespuestaMentoria(mentoria);
+        for (Usuario u : usuarioRepository.findAll()) {
+            if (u.isActivo() && u.getMentorias().stream().map(UsuarioMentoria::getMentoria)
+                    .map(Mentoria::getCurso)
+                    .anyMatch(c -> c.equals(mentoria.getCurso()))) {
+                Notification n = new Notification(u, "MENTORIA",
+                        "Nueva mentoria del curso: "+mentoria.getCurso().getTitulo()+". " + mentoria.getTema());
+                notificationRepository.save(n);
+            }
+        }
         return ResponseEntity.ok(datosRetorno);
     }
 

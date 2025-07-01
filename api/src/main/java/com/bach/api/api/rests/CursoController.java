@@ -6,9 +6,13 @@ import com.bach.api.api.types.DTORegistroCurso;
 import com.bach.api.api.types.DTORespuestaCurso;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.CursoMusical;
+import com.bach.api.jpa.entities.Notification;
+import com.bach.api.jpa.entities.Usuario;
 import com.bach.api.jpa.enums.Instrumento;
 import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.CursoRepository;
+import com.bach.api.jpa.repositories.NotificationRepository;
+import com.bach.api.jpa.repositories.UsuarioRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +31,15 @@ public class CursoController {
     private CursoRepository repository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
+
+    @Autowired
     private TokenService tokenService;
 
-    //aqui el entor crea un curso
+    //aqui el mentor crea un curso
     @PostMapping("/registrar")
     public ResponseEntity<DTORespuestaCurso> registraCurso(@RequestBody DTORegistroCurso datos,
                                                            @RequestHeader("Authorization") String token){
@@ -40,6 +50,13 @@ public class CursoController {
         var curso = new CursoMusical(datos);
         repository.save(curso);
         var datosRespuesta = new DTORespuestaCurso(curso);
+        for (Usuario u : usuarioRepository.findAll()) {
+            if (u.isActivo() && u.getInstrumentoDominados().contains(curso.getInstrumentoBase())) {
+                Notification n = new Notification(u, "CURSO",
+                        "Nuevo curso: " + curso.getTitulo());
+                notificationRepository.save(n);
+            }
+        }
         return ResponseEntity.ok(datosRespuesta);
     }
 

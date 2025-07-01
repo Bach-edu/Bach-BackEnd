@@ -2,8 +2,7 @@ package com.bach.api.api.rests;
 
 import com.bach.api.api.types.DTORespuestaMentoria;
 import com.bach.api.config.security.TokenService;
-import com.bach.api.jpa.entities.UsuarioMentoria;
-import com.bach.api.jpa.entities.UsuarioMentoriaId;
+import com.bach.api.jpa.entities.*;
 import com.bach.api.jpa.repositories.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
@@ -37,6 +36,9 @@ public class UsuarioMentoriaController {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Autowired
+    private NotificationRepository notificationRepository;
+
     //inscribirte en mentoria
     @PostMapping("/{idMentoria}/inscribir")
     public ResponseEntity inscribirEnMentoria(@PathVariable Long idMentoria, @RequestHeader("Authorization") String token){
@@ -52,6 +54,9 @@ public class UsuarioMentoriaController {
         }
         var usuarioMentoria = new UsuarioMentoria(mentoriaOptional.get(), usuarioOptional.get(), key);
         repository.save(usuarioMentoria);
+        var n = new Notification(usuarioMentoria.getMentoria().getMentor(), "INSCRIPCION",
+                "Nuevo Alumno: " + usuarioMentoria.getUsuario().getNombreReal());
+        notificationRepository.save(n);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -72,6 +77,10 @@ public class UsuarioMentoriaController {
         }
         var usuarioMentoria = usuarioMentoriaOptional.get();
         usuarioMentoria.terminar();
+        Notification n = new Notification(usuarioMentoria.getMentoria().getMentor(), "FINALIZACION",
+                "El alumno: " + usuarioMentoria.getUsuario().getNombreReal()+ "Termino la mentoria "
+                        + usuarioMentoria.getMentoria().getTema());
+        notificationRepository.save(n);
         repository.save(usuarioMentoria);
 
         return ResponseEntity.ok("Mentoría " + idMentoria + " marcada como completada.");
@@ -95,6 +104,17 @@ public class UsuarioMentoriaController {
         }
         if (completadas < totalDeMentorias){
             return ResponseEntity.badRequest().body("aun no");
+        }
+        var curso = cursoOptional.get();
+        var usuario = usuarioOptional.get();
+        for (Usuario u : curso.getMentorias().stream().map(Mentoria::getMentor).toList()){
+            if (u.isActivo()) {
+                Notification n = new Notification(u, "FINALIZACION",
+                        "El alumno: " + usuario.getNombreReal() + "Termino el curso "
+                                + curso.getTitulo());
+                notificationRepository.save(n);
+                return ResponseEntity.ok("finalizado");
+            }
         }
         return ResponseEntity.ok("finalizado");
 

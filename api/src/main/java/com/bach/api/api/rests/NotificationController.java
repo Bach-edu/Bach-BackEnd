@@ -4,6 +4,7 @@ import com.bach.api.api.types.DTONotificacion;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.Notification;
 import com.bach.api.jpa.repositories.NotificationRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notificaciones")
+@SecurityRequirement(name = "bearer-key")
 public class NotificationController {
 
     @Autowired

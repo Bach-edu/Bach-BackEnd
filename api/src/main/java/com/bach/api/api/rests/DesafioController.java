@@ -5,10 +5,11 @@ import com.bach.api.api.types.DTORegistroDesafio;
 import com.bach.api.api.types.DTORespuestaDesafio;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.Desafio;
+import com.bach.api.jpa.entities.Notification;
+import com.bach.api.jpa.entities.Usuario;
+import com.bach.api.jpa.entities.UsuarioMentoria;
 import com.bach.api.jpa.enums.Role;
-import com.bach.api.jpa.repositories.DesafioRepository;
-import com.bach.api.jpa.repositories.MentoriaRepository;
-import com.bach.api.jpa.repositories.UsuarioMentoriaRepository;
+import com.bach.api.jpa.repositories.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,10 @@ public class DesafioController {
     @Autowired
     private UsuarioMentoriaRepository usuarioMentoriaRepository;
 
-    //los desafis se crean con las mentorias
+    @Autowired
+    private NotificationRepository notificationRepository;
+
+    //los desafios se crean con las mentorias
     @PostMapping("/crear-desafio/{mentoriaId}")
     public ResponseEntity<DTORespuestaDesafio> crearDesafio(@PathVariable Long mentoriaId, @RequestBody DTORegistroDesafio datos,
                                                             @RequestHeader ("Authorization") String token){
@@ -52,10 +56,17 @@ public class DesafioController {
         var desafio = new Desafio(datos, mentoria, curoso);
         repository.save(desafio);
         var datosRespuesta = new DTORespuestaDesafio(desafio);
+        for (UsuarioMentoria um : usuarioMentoriaRepository.findAll()) {
+            if (um.getUsuario().isActivo() && um.isCompletada()) {
+                Notification n = new Notification(um.getUsuario(), "DESAFIO",
+                        "Nuevo Desafio: " + desafio.getTitulo());
+                notificationRepository.save(n);
+            }
+        }
         return ResponseEntity.ok(datosRespuesta);
     }
 
-    //se pueden actualizar solo los tatos del DTO
+    //se pueden actualizar solo los datos del DTO
     @PutMapping("/actualizar-desafio/{idDesafio}")
     @Transactional
     public ResponseEntity<DTORespuestaDesafio> actualizaDesafio(@PathVariable Long idDesafio,

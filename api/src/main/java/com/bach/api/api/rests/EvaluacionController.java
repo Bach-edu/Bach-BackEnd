@@ -5,11 +5,11 @@ import com.bach.api.api.types.DTORegistroEvaluacion;
 import com.bach.api.api.types.DTORespuestaEvaluacion;
 import com.bach.api.config.security.TokenService;
 import com.bach.api.jpa.entities.Evaluacion;
+import com.bach.api.jpa.entities.Notification;
+import com.bach.api.jpa.entities.Usuario;
 import com.bach.api.jpa.enums.Role;
-import com.bach.api.jpa.repositories.DesafioRepository;
-import com.bach.api.jpa.repositories.EvaluacionRepository;
-import com.bach.api.jpa.repositories.UsuarioRepository;
-import com.bach.api.jpa.repositories.VideoRepository;
+import com.bach.api.jpa.repositories.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/evaluaciones")
+@SecurityRequirement(name = "bearer-key")
 public class EvaluacionController {
 
     @Autowired
@@ -33,6 +34,9 @@ public class EvaluacionController {
 
     @Autowired
     private VideoRepository videoRepository;
+
+    @Autowired
+    private NotificationRepository notificationRepository;
 
     @Autowired
     private TokenService tokenService;
@@ -60,6 +64,13 @@ public class EvaluacionController {
         var evaluacion = new Evaluacion(usuario, desafio, video ,datos);
         repository.save(evaluacion);
         var datosRespuesta = new DTORespuestaEvaluacion(evaluacion);
+        for (Usuario u : usuarioRepository.findAll()) {
+            if (u.isActivo() && evaluacion.getVideo().getUploader() == u) {
+                Notification n = new Notification(u, "EVALUACION",
+                        "Nueva evaluacion de mi video: " + evaluacion.getVideo().getTitulo());
+                notificationRepository.save(n);
+            }
+        }
         return ResponseEntity.ok(datosRespuesta);
     }
 
