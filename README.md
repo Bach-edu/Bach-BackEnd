@@ -27,6 +27,35 @@ Relaciones como `@ManyToMany` son gestionadas mediante tablas auxiliares como `d
 
 ---
 
+## ✨ Mejoras en Seguridad y Buenas Prácticas
+
+Este fork del proyecto incluye mejoras clave para el cumplimiento de requisitos de QA, Seguridad y DBA, tales como:
+
+### ✔️ Seguridad
+
+* Autenticación y autorización JWT con roles (ADMIN, MENTOR, USER).
+* CORS y CSRF configurados adecuadamente.
+* Habilitación de HTTPS con certificado autogenerado y keystore.
+* Seguridad de transporte configurada con headers seguros.
+
+### 🔎 Análisis de Vulnerabilidades
+
+* Escaneo automatizado con **OWASP ZAP**.
+* Se agregó el archivo de reporte en `reportes/2025-07-06-ZAP-Report-.html`.
+* Endpoints públicos protegidos contra acceso no autorizado.
+
+### ⌛ Backups Automatizados
+
+* Script programado con `@Scheduled` para generar respaldo de la base de datos MySQL cada X tiempo.
+* Configurable mediante `application.properties` (`backup.dir`).
+
+### ✅ Testing
+
+* Pruebas unitarias con JUnit sobre los endpoints más críticos (consultas, roles, acceso).
+* Se consideran pruebas manuales y automáticas documentadas en archivo externo.
+
+---
+
 ## 🚀 Arquitectura del Backend (Monolito)
 
 El backend sigue la estructura clásica en capas:
@@ -42,7 +71,7 @@ El backend sigue la estructura clásica en capas:
 │   ├── jpa
 │   │   ├── repositories     # Interfaces para acceso a datos
 │   │   └── entities         # Entidades JPA (Video, Usuario, etc.)
-│   |
+│   
 │   └── Application.java     # Clase principal
 ```
 
@@ -72,6 +101,8 @@ La API está protegida por roles: **ADMIN**, **MENTOR**, **USER**, y algunas rut
 * 📁 Modelado de la base de datos y relaciones.
 * 🛠️ Implementación de los endpoints REST principales.
 * 📈 Coordinación general del proyecto.
+* ⛨️ Fortalecimiento de la seguridad y configuración HTTPS.
+* ♻️ Automatización de respaldos y pruebas unitarias.
 
 **GitHub**: [https://github.com/Morfeo95/](https://github.com/Morfeo95/)
 **LinkedIn**: [https://www.linkedin.com/in/francisco-x-vera-/](https://www.linkedin.com/in/francisco-x-vera-/)
@@ -93,8 +124,8 @@ La API está protegida por roles: **ADMIN**, **MENTOR**, **USER**, y algunas rut
 * 🎓 Desarrollo completo del sistema de certificados.
 * 🤝 Participación clave en el sistema de chat.
 
-**GitHub**: \[https://github.com/John-Vivas]
-**LinkedIn**: \[https://www.linkedin.com/in/john-e-vivas]
+**GitHub**: \[https://github.com/John-Vivas](https://github.com/John-Vivas)
+**LinkedIn**: \[https://www.linkedin.com/in/john-e-vivas](https://www.linkedin.com/in/john-e-vivas)
 
 ---
 
