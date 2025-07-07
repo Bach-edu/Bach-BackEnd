@@ -33,7 +33,8 @@ public class SecurityFilter extends OncePerRequestFilter {
         // Obtiene la cabecera 'Authorization' de la solicitud
         var authHeader = request.getHeader("Authorization");
         // Verifica que la cabecera exista y no esté vacía
-        if (authHeader != null || authHeader == "") {
+        if (authHeader != null && !authHeader.isEmpty()
+                && authHeader.startsWith("Bearer ")) {
             // Elimina el prefijo 'Bearer ' para obtener el token puro
             var token = authHeader.replace("Bearer ", "");
             // Extrae el subject (email) del token

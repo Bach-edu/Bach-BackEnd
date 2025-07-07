@@ -10,4 +10,6 @@ public interface DesafioRepository extends JpaRepository<Desafio, Long> {
     Page<Desafio> findByMentoriaId(Long idMentoria, Pageable pageable);
 
     Page<Desafio> findByCursoId(Long idCurso, Pageable pageable);
+
+    Long countByCursoId(Long id);
 }

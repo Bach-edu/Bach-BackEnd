@@ -11,6 +11,7 @@ import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +43,7 @@ public class EvaluacionController {
     private TokenService tokenService;
 
     @PostMapping("/crear-evaluacion/desafio/{desafioId}/video/{videoId}")
-    public ResponseEntity<DTORespuestaEvaluacion> crearEvaluacion(@PathVariable Long desafioId, @PathVariable Long videoId ,@RequestBody DTORegistroEvaluacion datos,
+    public ResponseEntity<DTORespuestaEvaluacion> crearEvaluacion(@PathVariable Long desafioId, @PathVariable Long videoId ,@Valid @RequestBody DTORegistroEvaluacion datos,
                                                                   @RequestHeader("Authorization") String token){
         Role rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
         if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){

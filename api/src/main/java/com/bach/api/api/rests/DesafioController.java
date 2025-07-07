@@ -12,6 +12,7 @@ import com.bach.api.jpa.enums.Role;
 import com.bach.api.jpa.repositories.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,7 @@ public class DesafioController {
 
     //los desafios se crean con las mentorias
     @PostMapping("/crear-desafio/{mentoriaId}")
-    public ResponseEntity<DTORespuestaDesafio> crearDesafio(@PathVariable Long mentoriaId, @RequestBody DTORegistroDesafio datos,
+    public ResponseEntity<DTORespuestaDesafio> crearDesafio(@PathVariable Long mentoriaId,@Valid @RequestBody DTORegistroDesafio datos,
                                                             @RequestHeader ("Authorization") String token){
         Role rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
         if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){

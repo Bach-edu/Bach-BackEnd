@@ -21,5 +21,5 @@ public interface MentoriaRepository extends JpaRepository<Mentoria, Long> {
             @Param("usuarioId") Long usuarioId,
             Pageable pageable);
 
-    int countByCursoId(Long idCurso);
+    Long countByCursoId(Long idCurso);
 }

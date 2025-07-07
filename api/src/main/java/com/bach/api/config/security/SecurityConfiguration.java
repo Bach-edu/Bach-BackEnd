@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * Configuración de seguridad para la aplicación.
  * Habilita Web Security, define el filtro de seguridad, las reglas de acceso y los beans necesarios.
@@ -51,12 +53,24 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
                     .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     // Define las reglas de autorización por ruta
                     .authorizeHttpRequests(req -> {
-                        req.requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        req.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/usuarios/registrar").permitAll()
-                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
-                                .requestMatchers("/chat/**").permitAll();
+                                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                         req.anyRequest().authenticated();
-                    })
+                    }) .headers(headers -> headers
+                            // activa X-Content-Type-Options
+                            .contentTypeOptions(withDefaults())
+                            // activa X-Frame-Options DENY
+                            .frameOptions(withDefaults())
+                            // activa X-XSS-Protection
+                            .xssProtection(withDefaults())
+                            // y HSTS
+                            .httpStrictTransportSecurity(hsts ->
+                                    hsts.includeSubDomains(true)
+                                            .maxAgeInSeconds(31536000)
+                            )
+                    )
                     // Inserta el filtro de seguridad JWT antes del filtro de autenticación por formularios
                     .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                     .build();

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
+
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByEmail(String subject);
     Usuario getReferenceByEmail(String email);
@@ -24,4 +26,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Usuario findByUsername(String username);
 
+    @Query("""
+        SELECT u.rol, COUNT(u)
+        FROM Usuario u
+        WHERE u.activo = true
+        GROUP BY u.rol
+    """)
+    List<Object[]> countActiveUsersPerRoleRaw();
 }

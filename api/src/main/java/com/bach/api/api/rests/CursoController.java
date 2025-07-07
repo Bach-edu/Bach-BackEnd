@@ -15,6 +15,7 @@ import com.bach.api.jpa.repositories.NotificationRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,7 @@ public class CursoController {
 
     //aqui el mentor crea un curso
     @PostMapping("/registrar")
-    public ResponseEntity<DTORespuestaCurso> registraCurso(@RequestBody DTORegistroCurso datos,
+    public ResponseEntity<DTORespuestaCurso> registraCurso(@Valid @RequestBody DTORegistroCurso datos,
                                                            @RequestHeader("Authorization") String token){
         Role rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
         if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){

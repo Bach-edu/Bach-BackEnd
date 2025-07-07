@@ -14,6 +14,7 @@ import com.bach.api.jpa.repositories.MentoriaRepository;
 import com.bach.api.jpa.repositories.NotificationRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,7 +45,7 @@ public class MentoriaController {
 
     //solo los mentores crean mentorias se crean apartir de un curso existente
     @PostMapping("/crear-mentoria/{idCurso}")
-    public ResponseEntity<DTORespuestaMentoria> creamentoria(@PathVariable Long idCurso ,@RequestBody DTORegistroMentoria datos,
+    public ResponseEntity<DTORespuestaMentoria> creamentoria(@PathVariable Long idCurso ,@NotNull @RequestBody DTORegistroMentoria datos,
                                                              @RequestHeader("Authorization") String token){
         var rolDeUsuario = Role.valueOf(tokenService.getClaimrol(token));
         if (rolDeUsuario != Role.ADMIN && rolDeUsuario != Role.MENTOR){
