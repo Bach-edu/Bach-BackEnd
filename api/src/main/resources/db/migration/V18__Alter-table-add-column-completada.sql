@@ -1,2 +1,0 @@
-ALTER TABLE usuario_mentoria
-  ADD COLUMN completada BOOLEAN NOT NULL DEFAULT FALSE;

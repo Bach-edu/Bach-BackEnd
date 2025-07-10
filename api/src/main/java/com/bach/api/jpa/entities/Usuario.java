@@ -54,6 +54,9 @@ public class Usuario implements UserDetails {
 
     private boolean activo;
 
+    private int intentosFallidos;
+    private boolean bloqueado;
+
     public  Usuario(){}
 
     public Usuario(DTORegistroUsuario datos, String passwordHash) {
@@ -65,7 +68,7 @@ public class Usuario implements UserDetails {
         this.intereses = datos.intereses();
         this.instrumentoDominados = datos.instrumentoDominados();
         this.perfil = new Perfil(this);
-        this.activo =true;
+        this.activo = true;
     }
 
     public Set<SalaChatUsuario> getSalasChat() {
@@ -136,9 +139,27 @@ public class Usuario implements UserDetails {
         this.email = email;
     }
 
+    public int getIntentosFallidos() {
+        return intentosFallidos;
+    }
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_"+this.rol.name()));
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.bloqueado;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.activo;
     }
 
     public String getPassword() {
@@ -157,7 +178,6 @@ public class Usuario implements UserDetails {
     public void actualizaRol() {
         this.setRol(com.bach.api.jpa.enums.Role.MENTOR);
     }
-//Para que no de error DTORespuestaUsuario, cambiar esto
 
 
     public Set<InteresMusical> getIntereses() {
@@ -166,5 +186,17 @@ public class Usuario implements UserDetails {
 
     public Set<Instrumento> getInstrumentoDominados() {
         return instrumentoDominados;
+    }
+
+    public void incrementarIntentoFallido() {
+        this.intentosFallidos++;
+    }
+
+    public void bloquear() {
+        this.bloqueado=true;
+    }
+
+    public void resetearIntentos() {
+        this.intentosFallidos=0;
     }
 }

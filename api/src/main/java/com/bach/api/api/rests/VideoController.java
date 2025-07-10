@@ -10,6 +10,7 @@ import com.bach.api.jpa.repositories.DesafioRepository;
 import com.bach.api.jpa.repositories.MentoriaRepository;
 import com.bach.api.jpa.repositories.UsuarioRepository;
 import com.bach.api.jpa.repositories.VideoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/videos")
+@SecurityRequirement(name = "bearer-key")
 public class VideoController {
 
     @Autowired

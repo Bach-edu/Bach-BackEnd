@@ -29,6 +29,18 @@ public class UsuarioMentoria {
         this.usuario=usuario;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Mentoria getMentoria() {
+        return mentoria;
+    }
+
+    public boolean isCompletada() {
+        return completada;
+    }
+
     public void terminar() {
         this.completada = true;
     }

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZAP por Informe de Escaneo Checkmarx</title>
+<link
+	href="2025-07-06-ZAP-Report-/normalize/normalize.css" rel="stylesheet">
+<link
+	href="2025-07-06-ZAP-Report-/themes/original/main.css" rel="stylesheet">
+<link
+	href="2025-07-06-ZAP-Report-/themes/original/colors.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<h1>ZAP por Informe de Escaneo Checkmarx</h1>
+		<p>
+			<span>Generated with</span> <a href="https://zaproxy.org"><img
+				src="2025-07-06-ZAP-Report-/zap32x32.png" alt="The ZAP logo" class="zap-logo">ZAP</a>
+			<span>on dom 6 jul 2025, at 17:27:06</span>
+		</p>
+		<p>ZAP Versión: 2.16.1</p>
+		<p>
+			ZAP by <a href="https://checkmarx.com/">Checkmarx</a>
+		</p>
+	</header>
+
+	<main>
+
+		<section id="contents" class="contents">
+			<h2>Contents</h2>
+			<nav>
+				<ol>
+					<li><a
+						href="#about-this-report">About This Report</a>
+						<ol>
+							
+							<li><a
+								href="#report-parameters">Report Parameters</a></li>
+						</ol></li>
+					<data-th-block>
+					<li><a
+						href="#summaries">Summaries</a>
+						<ol>
+							<li><a
+								href="#risk-confidence-counts">Alert Counts by Risk and Confidence</a></li>
+							<li><a
+								href="#site-risk-counts">Alert Counts by Site and Risk</a></li>
+							<li><a
+								href="#alert-type-counts">Alert Counts by Alert Type</a></li>
+						</ol></li>
+					<li><a
+						href="#alerts">Alerts</a>
+						<ol>
+							
+							 
+							 
+							
+							
+							
+							
+							<li><a
+								href="#alerts--risk-1-confidence-3"><span>Risk</span>=<span
+									class="risk-level">Bajo</span>, <span>Confidence</span>=<span
+									class="confidence-level">Alta</span> <span>(1)</span></a></li>
+							
+							
+							
+							
+							  
+							
+							
+							
+							
+							<li><a
+								href="#alerts--risk-0-confidence-3"><span>Risk</span>=<span
+									class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+									class="confidence-level">Alta</span> <span>(1)</span></a></li>
+							
+							<li><a
+								href="#alerts--risk-0-confidence-2"><span>Risk</span>=<span
+									class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+									class="confidence-level">Media</span> <span>(2)</span></a></li>
+							
+							
+							  
+						</ol></li>
+					<li><a
+						href="#appendix">Appendix</a>
+						<ol>
+							<li><a
+								href="#alert-types">Alert Types</a></li>
+						</ol></li>
+					</data-th-block>
+				</ol>
+			</nav>
+		</section>
+
+		<section
+			id="about-this-report" class="about-this-report">
+			<h2>About This Report</h2>
+
+			
+
+			<section
+				id="report-parameters">
+				<h3>Report Parameters</h3>
+				<div class="report-parameters--container">
+					<h4>Contexts</h4>
+					
+					
+					<p>No contexts were selected, so all contexts were included by default.</p>
+					  
+
+					<h4>Sites</h4>
+					
+					<p>The following sites were included:</p>
+					<ul class="sites-list">
+						<li><span class="site">https://content-signature-2.cdn.mozilla.net</span></li>
+						<li><span class="site">http://localhost:8080</span></li>
+					</ul>
+					
+					<p>(If no sites were selected, all sites were included by default.)</p>
+					<p>An included site must also be within one of the included contexts for its data to be included in the report.</p>
+
+					<h4>Risk levels</h4>
+					<p>
+						<span>Included</span>:
+						 
+						<span class="included-risk-codes"><span class="risk-level">Alto</span>, <span class="risk-level">Medio</span>, <span class="risk-level">Bajo</span>, <span class="risk-level">Informativo</span></span>
+					</p>
+					<p>
+						<span>Excluded</span>:
+						 <span>None</span>
+						
+					</p>
+
+					<h4>Confidence levels</h4>
+					<p>
+						<span>Included</span>:
+						
+						
+						<span class="included-confidence-codes"><span class="confidence-level">Confirmado por Usuario</span>, <span class="confidence-level">Alta</span>, <span class="confidence-level">Media</span>, <span class="confidence-level">Baja</span></span>
+					</p>
+					<p>
+						<span>Excluded</span>:
+						
+						
+						<span class="included-confidence-codes"> <span class="confidence-level">Confirmado por Usuario</span>, <span class="confidence-level">Alta</span>, <span class="confidence-level">Media</span>, <span class="confidence-level">Baja</span>, <span class="confidence-level">Falso positivo</span></span>
+					</p>
+				</div>
+			</section>
+		</section>
+
+		
+		<section>
+			
+		</section>
+		
+		<section id="summaries" class="summaries">
+			<h2>Summaries</h2>
+
+			<section
+				id="risk-confidence-counts">
+				<h3>Alert Counts by Risk and Confidence</h3>
+				<table class="risk-confidence-counts-table">
+					<caption>
+						<p>This table shows the number of alerts for each level of risk and confidence included in the report.</p>
+						<p>(The percentages in brackets represent the count as a percentage of the total number of alerts included in the report, rounded to one decimal place.)</p>
+					</caption>
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<colgroup>
+						<col
+							style="width: 14.0%"><col
+							style="width: 14.0%"><col
+							style="width: 14.0%"><col
+							style="width: 14.0%">
+						<col style="width: 14.0%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td colspan="2" rowspan="2"></td>
+							<th scope="colgroup"
+								colspan="5">Confidence</th>
+						</tr>
+						<tr>
+							<th scope="col">Confirmado por Usuario</th>
+							<th scope="col">Alta</th>
+							<th scope="col">Media</th>
+							<th scope="col">Baja</th>
+							<th scope="col">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="rowgroup"
+								rowspan="5">Risk</th>
+							<th scope="row">Alto</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span class="additional-info-percentages">(0,0 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Medio</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span class="additional-info-percentages">(0,0 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Bajo</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(25,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>1</span><br> <span class="additional-info-percentages">(25,0 %)</span></td>
+						</tr>
+						<tr>
+							
+							<th scope="row">Informativo</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(25,0 %)</span></td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(50,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>3</span><br> <span class="additional-info-percentages">(75,0 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row">Total</th>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(50,0 %)</span></td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(50,0 %)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0,0 %)</span></td>
+							<td><span>4</span><br> <span
+								class="additional-info-percentages">(100%)</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section
+				id="site-risk-counts">
+				<h3>Alert Counts by Site and Risk</h3>
+				<table class="site-risk-counts-table">
+					<caption>
+						<p>This table shows, for each site for which one or more alerts were raised, the number of alerts raised at each risk level.</p>
+						<p>Alerts with a confidence level of &quot;False Positive&quot; have been excluded from these counts.</p>
+						<p>(The numbers in brackets are the number of alerts raised for the site at or above that risk level.)</p>
+					</caption>
+					<colgroup>
+						<col>
+						<col>
+					</colgroup>
+					<colgroup>
+						<col
+							style="width: 16.25%"><col
+							style="width: 16.25%"><col
+							style="width: 16.25%"><col
+							style="width: 16.25%">
+					</colgroup>
+					<thead>
+						<tr>
+							<td colspan="2" rowspan="2"></td>
+							<th scope="colgroup" colspan="4">Risk</th>
+						</tr>
+						<tr>
+							<th scope="col">
+								<span>Alto</span><br>  <span
+									class="additional-info-percentages">(= Alto)</span>  
+							</th>
+							<th scope="col">
+								<span>Medio</span><br>   <span
+									class="additional-info-percentages">(&gt;= Medio)</span> 
+							</th>
+							<th scope="col">
+								<span>Bajo</span><br>   <span
+									class="additional-info-percentages">(&gt;= Bajo)</span> 
+							</th>
+							<th scope="col">
+								<span>Informativo</span><br>   <span
+									class="additional-info-percentages">(&gt;= Informativo)</span> 
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="rowgroup"
+								rowspan="2">Site</th>
+							<th scope="row">https://content-signature-2.cdn.mozilla.net</th>
+							
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(1)</span></td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(2)</span></td>
+							
+						</tr>
+						<tr>
+							
+							<th scope="row">http://localhost:8080</th>
+							
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>0</span><br> <span
+								class="additional-info-percentages">(0)</span></td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(2)</span></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section
+				id="alert-type-counts">
+				<h3>Alert Counts by Alert Type</h3>
+				<table class="alert-type-counts-table">
+					<caption>
+						<p>This table shows the number of alerts of each alert type, together with the alert type&#39;s risk level.</p>
+						<p>(The percentages in brackets represent each count as a percentage, rounded to one decimal place, of the total number of alerts included in this report.)</p>
+					</caption>
+					<thead>
+						<tr>
+							<th scope="col">Alert type</th>
+							<th scope="col">Risk</th>
+							<th scope="col">Count</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-0">Strict-Transport-Security Header No Establecido</a></th>
+							<td class="risk-level">Bajo</td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(25,0 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-1">Petición de Autenticación Identificada</a></th>
+							<td class="risk-level">Informativo</td>
+							<td><span>2</span><br> <span
+								class="additional-info-percentages">(50,0 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-2">Recuperado de la Caché</a></th>
+							<td class="risk-level">Informativo</td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(25,0 %)</span></td>
+						</tr>
+						<tr>
+							<th scope="row"><a
+								href="#alert-type-3">Respuesta de Gestión de Sesión Identificada</a></th>
+							<td class="risk-level">Informativo</td>
+							<td><span>1</span><br> <span
+								class="additional-info-percentages">(25,0 %)</span></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th scope="row">Total</th>
+							<td></td>
+							<td>4</td>
+						</tr>
+					</tfoot>
+				</table>
+			</section>
+		</section>
+
+		<section id="alerts" class="alerts">
+			<h2>Alerts</h2>
+			<ol>
+				
+				 
+				 
+				 
+				
+				
+				<li id="alerts--risk-1-confidence-3">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Bajo</span>, <span>Confidence</span>=<span
+							class="confidence-level">Alta</span> <span>(1)</span>
+					</h3>
+					<ol>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">https://content-signature-2.cdn.mozilla.net</span> <span>(1)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-0">Strict-Transport-Security Header No Establecido</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2025-08-19-19-31-45.chain</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">OWASP_2021_A05</a></span> 
+				</li>
+				<li>
+					<span><a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">OWASP_2017_A06</a></span> 
+				</li>
+				<li>
+					 <span>POLICY_QA_STD = </span>
+				</li>
+				<li>
+					 <span>POLICY_PENTEST = </span>
+				</li>
+				<li>
+					<span><a href="https://cwe.mitre.org/data/definitions/319.html">CWE-319</a></span> 
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>HTTP Strict Transport Security (HSTS) es un mecanismo de política de seguridad web mediante el cual un servidor web declara que los agentes de usuario conformes (como un navegador web) deben interactuar con él utilizando únicamente conexiones HTTPS seguras (es decir, HTTP superpuesto a TLS/SSL). HSTS es un protocolo de seguimiento de estándares del IETF y se especifica en RFC 6797.</p>
+ </td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (667 bytes)</summary>
+				
+				<pre><code>GET https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2025-08-19-19-31-45.chain HTTP/1.1
+host: content-signature-2.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+If-Modified-Since: Mon, 30 Jun 2025 19:31:47 GMT
+If-None-Match: &quot;8c7f97ef520674fc42cca9a501f3c80c&quot;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJCYWNoIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpZCI6MSwicm9sIjoiTUVOVE9SIiwiZXhwIjoxNzUyMDkzNTIwfQ.TROBIaiEKVKasWYrCGTdrZP4-A9RuRnWnw0OcE6VquQ
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (171 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 304 Not Modified
+Date: Sun, 06 Jul 2025 21:15:46 GMT
+Age: 5690
+ETag: &quot;8c7f97ef520674fc42cca9a501f3c80c&quot;
+Cache-Control: public,max-age=3600
+Alt-Svc: clear
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	
+	
+	
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Asegúrese de que su servidor web, servidor de aplicaciones, balanceador de carga, etc. está configurado para aplicar Strict-Transport-Security.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+						
+						
+					</ol>
+				</li>
+				
+				
+				
+				
+				  
+				 
+				
+				
+				<li id="alerts--risk-0-confidence-3">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+							class="confidence-level">Alta</span> <span>(1)</span>
+					</h3>
+					<ol>
+						
+						
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">http://localhost:8080</span> <span>(1)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-1">Petición de Autenticación Identificada</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">POST http://localhost:8080/login</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>La petición en cuestión se ha identificado como una petición de autenticación. El campo &quot;Otra información&quot; contiene un conjunto de líneas key=vvalue que identifican cualquier campo relevante. Si la solicitud está en un contexto que tiene un método de autenticación configurado como &quot;Detección automática&quot;, esta regla cambiará la autenticación para que coincida con la petición identificada.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>userParam={</p>
+
+<p>  &quot;email&quot;: &quot;user1@example.com&quot;,</p>
+
+<p>  &quot;password&quot;: &quot;Password123!&quot;</p>
+
+<p>}</p>
+
+<p>userValue=</p>
+
+<p>passwordParam={</p>
+
+<p>  &quot;email&quot;: &quot;user1@example.com&quot;,</p>
+
+<p>  &quot;password&quot;: &quot;Password123!&quot;</p>
+
+<p>}</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (347 bytes)</summary>
+				
+				<pre><code>POST http://localhost:8080/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 64
+host: localhost:8080
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJCYWNoIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpZCI6MSwicm9sIjoiTUVOVE9SIiwiZXhwIjoxNzUyMDkzNTIwfQ.TROBIaiEKVKasWYrCGTdrZP4-A9RuRnWnw0OcE6VquQ
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (64 bytes)</summary>
+				
+				<pre><code>{
+  &quot;email&quot;: &quot;user1@example.com&quot;,
+  &quot;password&quot;: &quot;Password123!&quot;
+}</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (331 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 403
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 0
+Date: Sun, 06 Jul 2025 22:00:44 GMT
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>{
+  &quot;email&quot;: &quot;user1@example.com&quot;,
+  &quot;password&quot;: &quot;Password123!&quot;
+}</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>{
+  &quot;email&quot;: &quot;user1@example.com&quot;,
+  &quot;password&quot;: &quot;Password123!&quot;
+}</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Se trata de una alerta informativa y no de una vulnerabilidad, por lo que no hay nada que corregir.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+					</ol>
+				</li>
+				
+				<li id="alerts--risk-0-confidence-2">
+					<h3>
+						<span>Risk</span>=<span
+							class="risk-level">Informativo</span>, <span>Confidence</span>=<span
+							class="confidence-level">Media</span> <span>(2)</span>
+					</h3>
+					<ol>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">https://content-signature-2.cdn.mozilla.net</span> <span>(1)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-2">Recuperado de la Caché</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">GET https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2025-08-19-19-31-45.chain</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				<li>
+					<span><a href="https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_Application_Security_Testing/04-Authentication_Testing/06-Testing_for_Browser_Cache_Weaknesses">WSTG-v42-ATHN-06</a></span> 
+				</li>
+				<li>
+					 <span>POLICY_PENTEST = </span>
+				</li>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>El contenido se ha recuperado de una caché compartida. Si los datos de respuesta son sensibles, personales o específicos del usuario, esto puede resultar en la filtración de información sensible. En algunos casos, esto puede incluso resultar en que un usuario obtenga el control completo de la sesión de otro usuario, dependiendo de la configuración de los componentes de caché en uso en su entorno. Este problema se produce principalmente cuando los servidores de caché, como los &quot;proxy&quot;, están configurados en la red local. Esta configuración se encuentra típicamente en entornos corporativos o educativos, por ejemplo.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>La presencia de la cabecera &#39;Age&#39; indica que se está utilizando un servidor de caché compatible con HTTP/1.1.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (667 bytes)</summary>
+				
+				<pre><code>GET https://content-signature-2.cdn.mozilla.net/g/chains/202402/remote-settings.content-signature.mozilla.org-2025-08-19-19-31-45.chain HTTP/1.1
+host: content-signature-2.cdn.mozilla.net
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Connection: keep-alive
+If-Modified-Since: Mon, 30 Jun 2025 19:31:47 GMT
+If-None-Match: &quot;8c7f97ef520674fc42cca9a501f3c80c&quot;
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJCYWNoIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpZCI6MSwicm9sIjoiTUVOVE9SIiwiZXhwIjoxNzUyMDkzNTIwfQ.TROBIaiEKVKasWYrCGTdrZP4-A9RuRnWnw0OcE6VquQ
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (171 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 304 Not Modified
+Date: Sun, 06 Jul 2025 21:15:46 GMT
+Age: 5690
+ETag: &quot;8c7f97ef520674fc42cca9a501f3c80c&quot;
+Cache-Control: public,max-age=3600
+Alt-Svc: clear
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (0 bytes)</summary>
+				
+				<pre><code></code></pre>
+				
+				
+			</details></td>
+	</tr>
+	
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>Age: 5690</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Válida que la respuesta no contenga información confidencial, personal o específica del usuario. Si es así, considere el uso de los siguientes encabezados de respuesta HTTP para limitar o evitar que otro usuario almacene y recupere el contenido de la memoria caché:</p>
+
+<p>Cache-Control: no-cache, no-store, must-revalidate, private</p>
+
+<p>Pragma: no-cache</p>
+
+<p>Expires: 0</p>
+
+<p>Esta configuración indica a los servidores de almacenamiento en caché compatibles con HTTP 1.0 y HTTP 1.1 que no almacenen la respuesta ni la recuperen (sin validación) de la memoria caché en respuesta a una solicitud similar.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+						<li class="alerts--site-li">
+							<h4>
+								<span class="site">http://localhost:8080</span> <span>(1)</span>
+							</h4>
+							<ol>
+								
+								<li>
+									<h5>
+										<a
+											href="#alert-type-3">Respuesta de Gestión de Sesión Identificada</a> <span>(1)</span>
+									</h5>
+									<ol>
+										<li><details>
+												<summary>
+													<span class="request-method-n-url">POST http://localhost:8080/login</span>
+												</summary>
+												
+<table class="alerts-table">
+	<tr>
+		<th scope="row">Alert tags</th>
+		<td>
+			<ul class="alert-tags-list">
+				
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<th scope="row">Alert description</th>
+		<td> 
+<p>Se ha identificado que la respuesta dada contiene un token de gestión de sesión. El campo &#39;Other Info&#39; contiene un conjunto de tokens de cabecera que pueden utilizarse en el método Header Based Session Management (gestión de sesión basado en cabecera). Si la petición se encuentra en un contexto que tiene un método Session Management establecido en &quot;Auto-Detect&quot;, esta regla cambiará la gestión de sesión para utilizar los tokens identificados.</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Other info</th>
+		<td> 
+<p>json:token</p>
+ </td>
+	</tr>
+	<tr>
+		<th scope="row">Request</th>
+		<td><details open="open">
+				<summary>Request line and header section (330 bytes)</summary>
+				
+				<pre><code>POST http://localhost:8080/login HTTP/1.1
+Content-Type: application/json
+Content-Length: 64
+host: localhost:8080
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJCYWNoIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpZCI6MSwicm9sIjoiTUVOVE9SIiwiZXhwIjoxNzUyMDkzNTIwfQ.TROBIaiEKVKasWYrCGTdrZP4-A9RuRnWnw0OcE6VquQ
+
+</code></pre>
+				
+				
+			</details> <details class="request-body" open="open">
+				<summary>Request body (64 bytes)</summary>
+				
+				<pre><code>{
+  &quot;email&quot;: &quot;user1@example.com&quot;,
+  &quot;password&quot;: &quot;Password123!&quot;
+}</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Response</th>
+		<td><details open="open">
+				<summary>Status line and header section (365 bytes)</summary>
+				
+				<pre><code>HTTP/1.1 200
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Type: application/json
+Date: Sun, 06 Jul 2025 22:51:04 GMT
+content-length: 199
+
+</code></pre>
+				
+				
+			</details> <details class="response-body" open="open">
+				<summary>Response body (199 bytes)</summary>
+				
+				<pre><code>{&quot;token&quot;:&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJCYWNoIiwic3ViIjoidXNlcjFAZXhhbXBsZS5jb20iLCJpZCI6MSwicm9sIjoiTUVOVE9SIiwiZXhwIjoxNzUyMTAxNDY0fQ.DJuwjfETEFbbbVi8qKZQ1dmgZ2RrpWBz1A9Q4JvmLck&quot;}</code></pre>
+				
+				
+			</details></td>
+	</tr>
+	<tr>
+		<th scope="row">Parameter</th>
+		<td><pre><code>token</code></pre></td>
+	</tr>
+	
+	<tr>
+		<th scope="row">Evidence</th>
+		<td><pre><code>token</code></pre></td>
+	</tr>
+	<tr>
+		<th scope="row">Solution</th>
+		<td> 
+<p>Se trata de una alerta informativa y no de una vulnerabilidad, por lo que no hay nada que corregir.</p>
+ </td>
+	</tr>
+</table>
+
+											</details></li>
+									</ol>
+								</li>
+								
+							</ol>
+						</li>
+						
+					</ol>
+				</li>
+				
+				
+				  
+			</ol>
+		</section>
+
+		<section id="appendix" class="appendix">
+			<h2>Appendix</h2>
+
+			<section id="alert-types" class="alert-types">
+				<h3>Alert Types</h3>
+				<p class="alert-types-intro">This section contains additional information on the types of alerts in the report.</p>
+				<ol>
+					<li
+						id="alert-type-0">
+						<h4>Strict-Transport-Security Header No Establecido</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10035/">Strict-Transport-Security Header</a>)
+									</span>   
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">CWE ID</th>
+								<td><a
+									href="https://cwe.mitre.org/data/definitions/319.html">319</a></td>
+							</tr>
+							<tr>
+								<th scope="row">WASC ID</th>
+								<td>15</td>
+							</tr>
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Strict_Transport_Security_Cheat_Sheet.html</a></li>
+										<li><a
+											href="https://owasp.org/www-community/Security_Headers">https://owasp.org/www-community/Security_Headers</a></li>
+										<li><a
+											href="https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security">https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security</a></li>
+										<li><a
+											href="https://caniuse.com/stricttransportsecurity">https://caniuse.com/stricttransportsecurity</a></li>
+										<li><a
+											href="https://datatracker.ietf.org/doc/html/rfc6797">https://datatracker.ietf.org/doc/html/rfc6797</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-1">
+						<h4>Petición de Autenticación Identificada</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10111/">Petición de Autenticación Identificada</a>)
+									</span>   
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/auth-req-id/">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/auth-req-id/</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-2">
+						<h4>Recuperado de la Caché</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10050/">Recuperado de la Caché</a>)
+									</span>   
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://tools.ietf.org/html/rfc7234">https://tools.ietf.org/html/rfc7234</a></li>
+										<li><a
+											href="https://tools.ietf.org/html/rfc7231">https://tools.ietf.org/html/rfc7231</a></li>
+										<li><a
+											href="https://www.rfc-editor.org/rfc/rfc9110.html">https://www.rfc-editor.org/rfc/rfc9110.html</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+					<li
+						id="alert-type-3">
+						<h4>Respuesta de Gestión de Sesión Identificada</h4>
+						<table class="alert-types-table">
+							<tr>
+								<th scope="row">Source</th>
+								<td>
+									
+									   <span>raised by a passive scanner</span> <span>(<a
+										href="https://www.zaproxy.org/docs/alerts/10112/">Respuesta de Gestión de Sesión Identificada</a>)
+									</span>   
+								</td>
+							</tr>
+							
+							
+							<tr>
+								<th scope="row">Reference</th>
+								<td>
+									<ol>
+										<li><a
+											href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id</a></li>
+									</ol>
+								</td>
+							</tr>
+						</table>
+					</li>
+				</ol>
+			</section>
+		</section>
+		 
+	</main>
+</body>
+</html>
+
+
+

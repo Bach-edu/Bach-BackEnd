@@ -5,5 +5,7 @@ CREATE TABLE usuarios(
     email VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(250) NOT NULL,
     rol VARCHAR(7) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT TRUE
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    intentos_fallidos INT NOT NULL DEFAULT 0,
+    bloqueado BOOLEAN NOT NULL DEFAULT FALSE
 );
